@@ -1,0 +1,16 @@
+# dependencies
+node_modules
+
+# next
+.next
+out
+
+# production
+build
+
+# env
+.env*
+
+# misc
+*.log
+.DS_Store
