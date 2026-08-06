@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export function FeaturedSignalSection() {
   return (
-    <section className="border-b hairline py-24 md:py-32" id="signal">
-      <div className="site-shell grid-field flex min-h-[620px] items-center justify-center px-4 py-16">
+    <section className="border-b hairline py-16 md:py-24" id="signal">
+      <div className="site-shell grid-field flex items-center justify-center px-4 py-10 md:py-16">
         <article className="panel grid w-full max-w-4xl overflow-hidden md:grid-cols-[1fr_260px]">
           <div className="p-8 md:p-14">
             <p className="mb-8 text-[11px] font-black uppercase tracking-[0.18em] text-[var(--blue-quiet)]">

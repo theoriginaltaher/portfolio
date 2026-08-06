@@ -10,6 +10,12 @@ const pathways = [
     href: "/projects/systems",
     meta: "Cloud / Product / Ops",
     featured: true,
+    details: [
+      ["Scope", "Architecture, build, cloud deployment, operating handoff"],
+      ["Field", "Media-intensive operations and internal tooling"],
+      ["Constraint solved", "Throughput held while headcount stayed flat"],
+    ],
+    action: "Read the case file",
   },
   {
     code: "02_MEDIA_PIPE",
@@ -17,6 +23,11 @@ const pathways = [
     description: "High-fidelity cinematic production and storytelling pipelines.",
     href: "/projects/media",
     meta: "Photo / Video / Narrative",
+    details: [
+      ["Scope", "Direction, capture, edit, asset pipeline"],
+      ["Field", "Brand and founder-led storytelling"],
+      ["Solved", "Repeatable output without losing craft"],
+    ],
   },
   {
     code: "03_USER_X",
@@ -24,6 +35,11 @@ const pathways = [
     description: "Neutral interface research and accessibility-focused UX.",
     href: "/projects",
     meta: "Systems / Screens / Behavior",
+    details: [
+      ["Scope", "Interface research, accessibility passes"],
+      ["Field", "Operator-facing tools"],
+      ["Solved", "Dense data made readable under pressure"],
+    ],
   },
   {
     code: "04_WRITING",
@@ -32,14 +48,16 @@ const pathways = [
     href: "/blog",
     meta: "Notes / Docs / Signals",
     wide: true,
+    note:
+      "Decision records that explain why a system is shaped the way it is: the reasoning, not just the result.",
   },
 ];
 
 export function ProjectBinSection() {
   return (
-    <section className="border-b hairline bg-[#060606] py-24 md:py-32" id="projects">
+    <section className="border-b hairline bg-[#060606] py-16 md:py-24" id="projects">
       <div className="site-shell max-w-6xl">
-        <div className="mb-12 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+        <div className="mb-11 flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <SectionLabel index="03 /" label="Project_Bin.index" />
           <p className="text-[11px] uppercase tracking-[0.16em] text-[var(--dim)]">
             Systems / Media / Writing
@@ -53,30 +71,68 @@ export function ProjectBinSection() {
               href={item.href}
               className={
                 item.featured
-                  ? "group panel relative min-h-72 overflow-hidden p-9 transition hover:border-[var(--border-strong)] md:col-span-2"
+                  ? "group panel relative min-h-[260px] overflow-hidden p-6 transition hover:border-[var(--border-strong)] md:col-span-2 md:p-9"
                   : item.wide
-                    ? "group panel relative min-h-40 overflow-hidden p-9 transition hover:border-[var(--border-strong)] md:col-span-2"
-                    : "group panel relative min-h-56 overflow-hidden p-9 transition hover:border-[var(--border-strong)]"
+                    ? "group panel relative overflow-hidden p-6 transition hover:border-[var(--border-strong)] md:col-span-2 md:p-9"
+                    : "group panel relative min-h-[200px] overflow-hidden p-6 transition hover:border-[var(--border-strong)] md:p-9"
               }
             >
-              <div className="absolute right-9 top-9 text-sm text-[var(--dim)] transition group-hover:text-[var(--red)]">
+              <div className="absolute right-6 top-6 text-sm text-[var(--dim)] transition group-hover:text-[var(--red)] md:right-9 md:top-9">
                 /+
               </div>
-              <p className="mb-10 text-[11px] uppercase tracking-[0.16em] text-[var(--dim)]">
+              <p className="mb-9 text-[11px] uppercase tracking-[0.16em] text-[var(--dim)]">
                 {item.code}
               </p>
-              <h3 className="text-3xl font-black tracking-[-0.04em]">{item.title}</h3>
+              <h3 className="text-[clamp(1.5rem,3vw,2rem)] font-black tracking-[-0.04em]">
+                {item.title}
+              </h3>
               <p className="mt-4 max-w-2xl pretty text-base leading-7 text-[var(--muted)]">
                 {item.description}
               </p>
-              <p className="mt-9 text-[11px] uppercase tracking-[0.16em] text-[var(--dim)]">
-                {item.meta}
-              </p>
-              {item.featured ? (
-                <div className="absolute bottom-9 right-9 hidden h-24 w-24 border border-white/5 opacity-40 md:block">
-                  <div className="m-auto mt-6 h-12 w-12 border border-white/10" />
-                </div>
+
+              {"details" in item && item.details ? (
+                <dl
+                  className={
+                    item.featured
+                      ? "mt-7 grid gap-x-8 gap-y-5 border-t border-white/6 pt-6 text-sm md:grid-cols-3"
+                      : "mt-6 grid gap-3.5 border-t border-white/6 pt-5 text-[13px]"
+                  }
+                >
+                  {item.details.map(([label, value]) => (
+                    <div
+                      key={label}
+                      className={item.featured ? "" : "flex gap-3"}
+                    >
+                      <dt
+                        className={
+                          item.featured
+                            ? "mb-1.5 text-[10px] font-black uppercase tracking-[0.16em] text-[var(--dim)]"
+                            : "min-w-24 text-[10px] font-black uppercase tracking-[0.14em] text-[var(--dim)]"
+                        }
+                      >
+                        {label}
+                      </dt>
+                      <dd className="m-0 flex-1 leading-6 text-[#c6c9ce]">{value}</dd>
+                    </div>
+                  ))}
+                </dl>
               ) : null}
+
+              {"note" in item && item.note ? (
+                <p className="mt-6 max-w-3xl pretty text-[15px] leading-7 text-[#c6c9ce]">
+                  {item.note}
+                </p>
+              ) : null}
+
+              <p
+                className={
+                  item.action
+                    ? "mt-6 text-[11px] font-black uppercase tracking-[0.16em] text-[var(--red)]"
+                    : "mt-6 text-[11px] uppercase tracking-[0.16em] text-[var(--dim)]"
+                }
+              >
+                {item.action ?? item.meta}
+              </p>
             </Link>
           ))}
         </div>

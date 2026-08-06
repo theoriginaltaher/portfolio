@@ -26,9 +26,9 @@ const tracks = [
 
 export function RoadmapSection() {
   return (
-    <section className="border-b hairline py-24 md:py-32" id="roadmap">
+    <section className="border-b hairline py-16 md:py-24" id="roadmap">
       <div className="site-shell max-w-5xl">
-        <div className="mb-16 flex items-start justify-between gap-6">
+        <div className="mb-11 flex flex-wrap items-center justify-between gap-4">
           <SectionLabel index="04 /" label="Active Roadmap" tone="blue" />
           <div className="hidden gap-5 text-[11px] uppercase tracking-[0.14em] text-[var(--dim)] md:flex">
             <span className="before:mr-2 before:inline-block before:h-1.5 before:w-1.5 before:bg-[var(--red)]">
@@ -40,7 +40,7 @@ export function RoadmapSection() {
           </div>
         </div>
 
-        <div className="space-y-14">
+        <div className="space-y-11">
           {tracks.map((track) => (
             <div key={track.name}>
               <div className="mb-4 flex items-end justify-between">
@@ -54,14 +54,21 @@ export function RoadmapSection() {
                 </div>
                 <span className="text-sm text-[var(--muted)]">{track.percent}</span>
               </div>
-              <div className="h-3 bg-white/8">
+              <div
+                className="h-2.5 bg-white/8"
+                role="progressbar"
+                aria-valuenow={Number.parseInt(track.percent, 10)}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label={`${track.name} progress`}
+              >
                 <div
                   className={
                     track.color === "red"
-                      ? "h-full bg-[var(--red)]"
+                      ? "h-full origin-left animate-[barIn_1.1s_cubic-bezier(0.22,1,0.36,1)_both] bg-[var(--red)]"
                       : track.color === "blue"
-                        ? "h-full bg-[var(--blue)] opacity-90"
-                        : "h-full bg-white/24"
+                        ? "h-full origin-left animate-[barIn_1.1s_cubic-bezier(0.22,1,0.36,1)_0.12s_both] bg-[var(--blue)] opacity-90"
+                        : "h-full origin-left animate-[barIn_1.1s_cubic-bezier(0.22,1,0.36,1)_0.24s_both] bg-white/24"
                   }
                   style={{ width: track.percent }}
                 />

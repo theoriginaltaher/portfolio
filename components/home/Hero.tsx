@@ -5,113 +5,97 @@ const focusItems = ["AI Workflows", "Media Systems", "Web Architecture"];
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden border-b hairline bg-[#060606] pt-14">
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.026)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.018)_1px,transparent_1px)] bg-[length:48px_48px] opacity-22 md:bg-[length:96px_96px] md:opacity-35" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(176,32,32,0.12),transparent_19rem),radial-gradient(circle_at_85%_36%,rgba(0,72,172,0.08),transparent_24rem),linear-gradient(180deg,rgba(6,6,6,0)_0%,#060606_100%)] md:bg-[radial-gradient(circle_at_78%_34%,rgba(0,72,172,0.12),transparent_28rem),linear-gradient(180deg,rgba(6,6,6,0)_0%,#060606_100%)]" />
+    <section className="relative overflow-hidden border-b hairline bg-[#060606] px-0 pb-4 pt-[72px] md:pb-7 md:pt-[84px]">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_40%,rgba(59,88,124,0.16),transparent_30rem),radial-gradient(circle_at_8%_90%,rgba(176,32,32,0.08),transparent_24rem)]" />
 
-      <div className="relative mx-auto grid min-h-[calc(100svh-86px)] w-[min(100%-36px,1280px)] items-center gap-10 py-10 md:min-h-[calc(100vh-118px)] md:w-[min(100%-40px,1280px)] md:py-12 lg:grid-cols-[minmax(460px,600px)_1fr]">
-        <div className="z-10 w-full max-w-[620px]">
-          <p className="mb-4 max-w-[15rem] text-[9px] font-black uppercase leading-5 tracking-[0.18em] text-[var(--red)] md:mb-6 md:max-w-none md:text-[11px] md:leading-normal md:tracking-[0.22em]">
-            SESSION_01 / CREATIVE COMMAND CENTER
-          </p>
-
-          <h1 className="text-[clamp(3.35rem,16.5vw,4.65rem)] font-black uppercase leading-[0.9] tracking-[-0.038em] text-[var(--text)] md:text-[clamp(5.2rem,7.4vw,7.4rem)] md:leading-[0.86] md:tracking-[-0.045em]">
-            Taher
-            <br />
-            Hussain
-          </h1>
-
-          <p className="mt-4 flex max-w-[22rem] flex-wrap gap-x-2 gap-y-1 text-[12px] font-semibold leading-5 text-[#d8d8d8] md:mt-6 md:max-w-none md:text-base md:leading-6">
-            <span>Founder</span>
-            <span className="text-[var(--dim)]">/</span>
-            <span>Creative Technologist</span>
-            <span className="text-[var(--dim)]">/</span>
-            <span>Chief Technology Officer</span>
-          </p>
-
-          <p className="mt-5 max-w-[22rem] pretty text-[15px] leading-[1.75] text-[#c6c9ce] md:max-w-xl md:text-[17px] md:leading-[1.7]">
-            I design, build, and manage digital solutions across web development,
-            multimedia production, AI-assisted systems, and technology-driven
-            business operations.
-          </p>
-
-          <div className="mt-7 grid grid-cols-1 gap-3 min-[420px]:flex min-[420px]:flex-wrap md:mt-8">
-            <Link
-              href="/projects"
-              className="inline-flex h-12 items-center justify-center bg-[var(--red)] px-7 text-[11px] font-black uppercase tracking-[0.18em] text-white transition hover:bg-[#9e1c1c] md:h-11"
-            >
-              View Systems
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex h-12 items-center justify-center border border-white/12 bg-black/18 px-7 text-[11px] font-black uppercase tracking-[0.18em] text-[var(--text)] transition hover:border-[var(--blue-border)] md:h-11"
-            >
-              Initiate Contact
-            </Link>
+      <div className="relative mx-3.5 max-w-[1320px] md:mx-auto md:w-[calc(100%_-_28px)]">
+        <div className="relative flex min-h-[auto] flex-col justify-between overflow-hidden rounded-[18px] border border-[var(--border-strong)] bg-[#0a0b0c] p-5 md:min-h-[min(720px,calc(100svh-132px))] md:rounded-[30px] md:p-9">
+          <div className="absolute bottom-0 right-0 top-0 hidden w-[46%] overflow-hidden rounded-br-[30px] rounded-tl-[180px] bg-[#101215] lg:block">
+            <Image
+              src="/assets/taher-hero-camera.png"
+              alt=""
+              fill
+              priority
+              sizes="46vw"
+              className="object-cover object-[56%_34%] saturate-[0.82] contrast-[1.04]"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,#0a0b0c_0%,rgba(10,11,12,0.55)_26%,rgba(10,11,12,0.08)_62%,rgba(10,11,12,0.42)_100%)]" />
+            <div className="absolute inset-x-0 bottom-0 h-[46%] bg-gradient-to-t from-[#0a0b0c] to-transparent" />
           </div>
 
-          <div className="mt-7 flex max-w-[22rem] flex-wrap gap-x-3 gap-y-2 border-t border-white/7 pt-4 text-[9px] font-bold uppercase tracking-[0.14em] text-[var(--dim)] md:hidden">
-            <span>Sri Lanka / Global</span>
-            <span className="text-[var(--red)]">AI</span>
-            <span>Media</span>
-            <span>Web</span>
-            <span>Cloud</span>
-          </div>
-        </div>
-
-        <div className="relative z-10 mx-auto hidden w-full max-w-[580px] md:block lg:mr-0 lg:max-w-[590px]">
-          <div className="relative border border-white/9 bg-[#101010]">
-            <div className="flex h-10 items-center justify-between border-b border-white/7 px-4 text-[10px] font-black uppercase tracking-[0.16em] text-[var(--dim)]">
-              <span>CANVAS_01 / PORTRAIT</span>
-              <span className="text-[var(--blue-quiet)]">Creative Workspace</span>
-            </div>
-            <div className="relative aspect-[4/5] max-h-[calc(100vh-190px)] min-h-[420px] overflow-hidden md:aspect-[5/4] md:min-h-0 lg:aspect-[4/5]">
-              <Image
-                src="/assets/taher-hero-camera.png"
-                alt="Taher Hussain holding a camera in a dark creative workspace"
-                fill
-                priority
-                sizes="(min-width: 1024px) 46vw, 100vw"
-                className="object-cover object-[52%_45%]"
-              />
-              <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,6,6,0.16)_0%,rgba(6,6,6,0.02)_42%,rgba(6,6,6,0.14)_100%)]" />
-              <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#060606] to-transparent" />
-              <span className="absolute left-3 top-3 h-4 w-4 border-l border-t border-white/18" />
-              <span className="absolute right-3 top-3 h-4 w-4 border-r border-t border-white/18" />
-              <span className="absolute bottom-3 left-3 h-4 w-4 border-b border-l border-white/18" />
-              <span className="absolute bottom-3 right-3 h-4 w-4 border-b border-r border-white/18" />
-            </div>
+          <div className="relative z-10 flex flex-wrap items-start justify-between gap-x-5 gap-y-3 text-[9px] font-black uppercase leading-5 tracking-[0.2em] md:text-[11px]">
+            <p className="m-0 max-w-[26ch] text-[var(--red)]">
+              I build the technical backbone founders stop worrying about
+            </p>
+            <p className="m-0 hidden text-[var(--dim)] sm:block">
+              / Systems / Media / Web
+            </p>
           </div>
 
-          <aside className="absolute bottom-4 right-4 w-[min(68%,220px)] border border-white/8 bg-[#101010]/92 p-3 text-[12px] text-[var(--muted)]">
-            <div className="mb-2.5 flex items-center justify-between border-b border-white/6 pb-2">
-              <span className="text-[9px] font-black uppercase tracking-[0.16em] text-[var(--text)]">
-                Workspace Focus
+          <div className="relative z-10 py-8 md:py-[min(8vh,64px)]">
+            <h1 className="m-0 text-[clamp(3rem,15vw,4.4rem)] font-black uppercase leading-[0.86] tracking-[-0.035em] text-[var(--text)] md:text-[clamp(3.4rem,12.5vw,9rem)] md:leading-[0.84] md:tracking-[-0.04em]">
+              <span className="block">Taher</span>
+              <span className="block text-[#eceef1] md:ml-[clamp(20px,7vw,120px)]">
+                Hussain<span className="text-[var(--red)]">.</span>
               </span>
-              <span className="h-1 w-1 bg-[var(--red)]" />
-            </div>
-            <div className="space-y-2">
-              {focusItems.map((item) => (
-                <div
-                  key={item}
-                  className="flex items-center justify-between gap-4 border-b border-white/5 pb-2 last:border-b-0 last:pb-0"
-                >
-                  <span>{item}</span>
-                  <span className="h-px w-8 bg-[var(--blue-border)]" />
-                </div>
-              ))}
-            </div>
-          </aside>
-        </div>
-      </div>
+            </h1>
+          </div>
 
-      <div className="relative border-t border-white/5 bg-[#060606]/60">
-        <div className="site-shell flex h-7 items-center justify-between text-[8px] font-normal uppercase tracking-[0.12em] text-[var(--dim)] opacity-65 md:h-8 md:text-[9px] md:tracking-[0.14em] md:opacity-75">
+          <div className="relative z-10 flex flex-wrap items-end justify-between gap-8 md:gap-12">
+            <div className="max-w-xl flex-1 basis-[300px]">
+              <p className="m-0 flex flex-wrap gap-x-2.5 gap-y-1 text-[11px] font-black uppercase leading-5 tracking-[0.14em] text-[#d8dbe0] md:text-sm">
+                <span>Founder</span>
+                <span className="text-[var(--red)]">/</span>
+                <span>Creative Technologist</span>
+                <span className="text-[var(--red)]">/</span>
+                <span>Chief Technology Officer</span>
+              </p>
+              <p className="mt-4 max-w-lg pretty text-[14px] leading-[1.75] text-[#a8adb5] md:text-base">
+                I design, build, and manage digital solutions across web development,
+                multimedia production, AI-assisted systems, and technology-driven
+                business operations.
+              </p>
+              <div className="mt-6 flex flex-col gap-2.5 min-[560px]:flex-row min-[560px]:flex-wrap md:mt-7">
+                <Link
+                  href="/projects"
+                  className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[var(--red)] px-7 text-[11px] font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#9e1c1c] min-[560px]:w-auto"
+                >
+                  View Systems
+                </Link>
+                <Link
+                  href="/contact"
+                  className="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-white/15 px-7 text-[11px] font-black uppercase tracking-[0.16em] text-[var(--text)] transition hover:border-[var(--blue-border)] hover:bg-white/[0.03] min-[560px]:w-auto"
+                >
+                  Initiate Contact
+                </Link>
+              </div>
+            </div>
+
+            <aside className="min-w-[min(100%,232px)] rounded-2xl border border-white/10 bg-[#090a0b]/75 p-4 text-[13px] text-[#a8adb5] backdrop-blur-md">
+              <div className="flex items-center justify-between gap-4 border-b border-white/7 pb-2.5">
+                <span className="text-[9px] font-black uppercase tracking-[0.18em] text-[var(--text)]">
+                  Workspace Focus
+                </span>
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--red)]" />
+              </div>
+              <div className="flex flex-col gap-2.5 pt-3">
+                {focusItems.map((item) => (
+                  <div key={item} className="flex items-center justify-between gap-5">
+                    <span>{item}</span>
+                    <span className="h-px w-7 bg-[var(--blue-border)]" />
+                  </div>
+                ))}
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-between gap-x-5 gap-y-2 px-1.5 pt-3.5 text-[9px] font-bold uppercase tracking-[0.16em] text-[var(--dim)]">
           <span className="flex items-center gap-2">
-            <span className="h-1 w-1 bg-[#20c56b]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#20c56b]" />
             System Ready
           </span>
-          <span className="hidden md:inline">
+          <span className="hidden sm:inline">
             Sri Lanka / Working Globally / AI / Media / Web / Cloud
           </span>
         </div>

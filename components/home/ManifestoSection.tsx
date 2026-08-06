@@ -4,7 +4,7 @@ const files = ["projects", "philosophy.md", "core_stack.json", "archive.zip"];
 
 export function ManifestoSection() {
   return (
-    <section className="border-b hairline py-24 md:py-32" id="philosophy">
+    <section className="border-b hairline py-16 md:py-24" id="philosophy">
       <div className="site-shell max-w-6xl">
         <SectionLabel index="02 /" label="PHILOSOPHY.MD" />
 
@@ -64,7 +64,7 @@ export function ManifestoSection() {
               </div>
             </div>
 
-            <blockquote className="mt-12 border-l border-white/12 pl-7 text-lg italic leading-8 text-[#c3cad4]">
+            <blockquote className="mt-12 border-l-2 border-[var(--red)] pl-7 text-lg italic leading-8 text-[#c3cad4]">
               Complexity is often a mask for lack of clarity. We seek the
               simple, the robust, and the enduring.
             </blockquote>

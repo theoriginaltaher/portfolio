@@ -28,7 +28,7 @@ export function Footer() {
           ))}
         </div>
 
-        <p className="text-xs uppercase tracking-[0.14em]">© 2026 Taher Hussain</p>
+        <p className="text-xs uppercase tracking-[0.14em]">&copy; 2026 Taher Hussain</p>
       </div>
     </footer>
   );
