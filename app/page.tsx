@@ -6,17 +6,26 @@ import { Hero } from "@/components/home/Hero";
 import { ManifestoSection } from "@/components/home/ManifestoSection";
 import { ProjectBinSection } from "@/components/home/ProjectBinSection";
 import { RoadmapSection } from "@/components/home/RoadmapSection";
+import { getExperience, getFeaturedProjects, getPosts, getSiteSettings } from "@/src/lib/content";
 
-export default function Home() {
+export const revalidate = 60;
+
+export default async function Home() {
+  const [projects, experience, posts, settings] = await Promise.all([
+    getFeaturedProjects(),
+    getExperience(true),
+    getPosts(true),
+    getSiteSettings(),
+  ]);
   return (
     <>
       <Navbar />
       <main>
-        <Hero />
+        <Hero settings={settings} />
         <ManifestoSection />
-        <ProjectBinSection />
-        <RoadmapSection />
-        <FeaturedSignalSection />
+        <ProjectBinSection projects={projects} />
+        <RoadmapSection experience={experience} />
+        <FeaturedSignalSection post={posts[0]} />
         <ContactComposerSection />
       </main>
       <Footer />

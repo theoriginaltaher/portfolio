@@ -1,0 +1,11 @@
+import fc from "fast-check";
+import { navItems } from "@/components/layout/nav-data";
+import { schemaTypes } from "@/sanity/schemas";
+
+describe("navigation and schema properties", () => {
+  // Property 2: Every navigation label maps to its required href.
+  it("keeps the navigation mapping stable", () => { const expected = [["Home", "/"], ["Experience", "/experience"], ["Projects", "/projects"], ["About", "/about"], ["Blog", "/blog"], ["Contact", "/contact"]]; fc.assert(fc.property(fc.integer({ min: 0, max: expected.length - 1 }), (index) => { expect([navItems[index].label, navItems[index].href]).toEqual(expected[index]); })); });
+
+  // Property 14: Every Sanity schema contains its required fields.
+  it("contains every required Sanity field", () => { const requirements: Record<string, string[]> = { project: ["title", "slug", "category", "shortDescription", "fullDescription", "featuredImage", "gallery", "year", "role", "tools", "order", "featured", "published"], experience: ["role", "organisation", "dateRange", "description", "category", "order", "current"], skill: ["label", "order"], post: ["title", "slug", "excerpt", "publishedAt", "readingTime", "body", "coverImage"], siteSettings: ["name", "role", "bio", "portrait", "email", "linkedIn", "metaDescription"] }; for (const schema of schemaTypes) { const fieldNames = (schema.fields || []).map((field) => field.name); expect(fieldNames).toEqual(expect.arrayContaining(requirements[schema.name])); } });
+});

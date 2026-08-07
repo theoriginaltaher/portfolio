@@ -2,12 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PageFrame } from "@/components/pages/PageFrame";
-
-export const metadata: Metadata = {
-  title: "About | Taher Hussain",
-  description:
-    "Meet Taher Hussain, a founder, creative technologist, and CTO working across digital systems, multimedia production, and AI-assisted operations.",
-};
+import { portableTextToPlainText } from "@/src/lib/adapters";
+import { getSiteSettings, getSkills } from "@/src/lib/content";
 
 const principles = [
   {
@@ -43,7 +39,18 @@ const disciplines = [
   },
 ];
 
-export default function AboutPage() {
+export const revalidate = 60;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSiteSettings();
+  return { title: `About | ${settings.name}`, description: settings.metaDescription };
+}
+
+export default async function AboutPage() {
+  const [settings, skills] = await Promise.all([getSiteSettings(), getSkills()]);
+  const bioText = portableTextToPlainText(settings.bio);
+  const bioParagraphs = bioText.split(/\n{2,}/).filter(Boolean);
+  const portrait = settings.portrait?.asset?.url || "/assets/taher-portrait-hero-color.png";
   return (
     <PageFrame>
       <main className="min-h-screen overflow-hidden bg-[var(--background)] pt-14">
@@ -62,9 +69,8 @@ export default function AboutPage() {
                   I build the systems behind ambitious work.
                 </h1>
                 <p className="mt-8 max-w-2xl pretty [overflow-wrap:anywhere] text-[clamp(1rem,1.5vw,1.2rem)] leading-8 text-[#b9bec6]">
-                  I&apos;m Taher Hussain, a founder, creative technologist, and Chief
-                  Technology Officer. My work sits where technical decisions,
-                  creative production, and day-to-day operations meet.
+                  I&apos;m {settings.name}, a {settings.role.toLowerCase()}. {bioParagraphs[0] ||
+                    "My work sits where technical decisions, creative production, and day-to-day operations meet."}
                 </p>
               </div>
 
@@ -87,8 +93,8 @@ export default function AboutPage() {
 
             <div className="relative min-h-[32rem] overflow-hidden lg:ml-[clamp(1.5rem,3vw,3.5rem)] lg:min-h-0">
               <Image
-                src="/assets/taher-portrait-hero-color.png"
-                alt="Taher Hussain in his workspace"
+                src={portrait}
+                alt={settings.portrait?.alt || `${settings.name} in his workspace`}
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 46vw"
@@ -166,6 +172,13 @@ export default function AboutPage() {
                     {discipline.detail}
                   </p>
                 </article>
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-2 border-t border-white/8 pt-8">
+              {skills.map((skill) => (
+                <span key={skill._id} className="border border-white/9 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--muted)]">
+                  {skill.label}
+                </span>
               ))}
             </div>
           </div>

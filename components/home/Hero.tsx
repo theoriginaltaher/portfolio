@@ -1,9 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import { portableTextToPlainText } from "@/src/lib/adapters";
+import type { SiteSettings } from "@/src/types";
 
 const focusItems = ["AI Workflows", "Media Systems", "Web Architecture"];
 
-export function Hero() {
+export function Hero({ settings }: { settings: SiteSettings }) {
+  const [firstName, ...lastNameParts] = settings.name.split(" ");
+  const lastName = lastNameParts.join(" ") || "Hussain";
+  const summary = portableTextToPlainText(settings.bio).split(/\n{2,}/)[0];
   return (
     <section className="relative overflow-hidden border-b hairline bg-[#060606] px-0 pb-4 pt-[72px] md:pb-7 md:pt-[84px]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_40%,rgba(59,88,124,0.16),transparent_30rem),radial-gradient(circle_at_8%_90%,rgba(176,32,32,0.08),transparent_24rem)]" />
@@ -34,9 +39,9 @@ export function Hero() {
 
           <div className="relative z-10 py-8 md:py-[min(8vh,64px)]">
             <h1 className="m-0 text-[clamp(3rem,15vw,4.4rem)] font-black uppercase leading-[0.86] tracking-[-0.035em] text-[var(--text)] md:text-[clamp(3.4rem,12.5vw,9rem)] md:leading-[0.84] md:tracking-[-0.04em]">
-              <span className="block">Taher</span>
+              <span className="block">{firstName}</span>
               <span className="block text-[#eceef1] md:ml-[clamp(20px,7vw,120px)]">
-                Hussain<span className="text-[var(--red)]">.</span>
+                {lastName}<span className="text-[var(--red)]">.</span>
               </span>
             </h1>
           </div>
@@ -46,14 +51,12 @@ export function Hero() {
               <p className="m-0 flex flex-wrap gap-x-2.5 gap-y-1 text-[11px] font-black uppercase leading-5 tracking-[0.14em] text-[#d8dbe0] md:text-sm">
                 <span>Founder</span>
                 <span className="text-[var(--red)]">/</span>
-                <span>Creative Technologist</span>
+                <span>{settings.role}</span>
                 <span className="text-[var(--red)]">/</span>
                 <span>Chief Technology Officer</span>
               </p>
               <p className="mt-4 max-w-lg pretty text-[14px] leading-[1.75] text-[#a8adb5] md:text-base">
-                I design, build, and manage digital solutions across web development,
-                multimedia production, AI-assisted systems, and technology-driven
-                business operations.
+                {summary || "I design, build, and manage digital solutions across web development, multimedia production, AI-assisted systems, and technology-driven business operations."}
               </p>
               <div className="mt-6 flex flex-col gap-2.5 min-[560px]:flex-row min-[560px]:flex-wrap md:mt-7">
                 <Link

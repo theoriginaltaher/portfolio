@@ -10,7 +10,16 @@ build
 
 # env
 .env*
+!.env.example
 
 # misc
 *.log
 .DS_Store
+reports/lighthouse/**/server.pid
+reports/lighthouse/**/*.json
+reports/isr-state.json
+.sanity/
+
+.vercel
+.env*
+!.env.example

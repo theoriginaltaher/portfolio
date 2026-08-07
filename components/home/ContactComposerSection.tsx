@@ -2,13 +2,35 @@
 
 import { FormEvent, useState } from "react";
 
-export function ContactComposerSection() {
-  const [sent, setSent] = useState(false);
+type FormStatus = "idle" | "submitting" | "success" | "error";
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+export function ContactComposerSection() {
+  const [status, setStatus] = useState<FormStatus>("idle");
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSent(true);
-    event.currentTarget.reset();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    setStatus("submitting");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          subject: data.get("subject"),
+          message: data.get("message"),
+        }),
+      });
+
+      if (!response.ok) throw new Error("Message delivery failed");
+      form.reset();
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
@@ -90,20 +112,29 @@ export function ContactComposerSection() {
           </div>
           <div className="flex flex-wrap items-center justify-between gap-3 border-t hairline p-5 md:p-6">
             <span
-              role={sent ? "status" : undefined}
+              role={status === "success" || status === "error" ? "status" : undefined}
               className={
-                sent
+                status === "success"
                   ? "text-[11px] uppercase tracking-[0.16em] text-[#20c56b]"
+                  : status === "error"
+                    ? "text-[11px] uppercase tracking-[0.16em] text-red-400"
                   : "text-[11px] uppercase tracking-[0.16em] text-[var(--dim)]"
               }
             >
-              {sent ? "Message committed, response within 48h" : "Encrypted / Direct"}
+              {status === "success"
+                ? "Message committed, response within 48h"
+                : status === "error"
+                  ? "Delivery unavailable, email directly"
+                  : status === "submitting"
+                    ? "Transmitting request"
+                    : "Encrypted / Direct"}
             </span>
             <button
               type="submit"
-              className="min-h-12 bg-[var(--red)] px-7 text-[11px] font-black uppercase tracking-[0.18em] text-white transition hover:bg-[#9e1c1c] focus:outline-none focus:ring-2 focus:ring-[var(--blue-border)] focus:ring-offset-2 focus:ring-offset-[#060606]"
+              disabled={status === "submitting"}
+              className="min-h-12 bg-[var(--red)] px-7 text-[11px] font-black uppercase tracking-[0.18em] text-white transition hover:bg-[#9e1c1c] focus:outline-none focus:ring-2 focus:ring-[var(--blue-border)] focus:ring-offset-2 focus:ring-offset-[#060606] disabled:cursor-wait disabled:opacity-60"
             >
-              Send Request
+              {status === "submitting" ? "Sending" : "Send Request"}
             </button>
           </div>
         </form>

@@ -1,6 +1,11 @@
 import Link from "next/link";
+import type { BlogPost } from "@/src/types";
 
-export function FeaturedSignalSection() {
+export function FeaturedSignalSection({ post }: { post?: BlogPost }) {
+  if (!post) return null;
+  const titleParts = post.title.split(" ");
+  const accentWord = titleParts.pop() || "Signals";
+  const titleLead = titleParts.join(" ");
   return (
     <section className="border-b hairline py-16 md:py-24" id="signal">
       <div className="site-shell grid-field flex items-center justify-center px-4 py-10 md:py-16">
@@ -10,16 +15,14 @@ export function FeaturedSignalSection() {
               Signal Lab / Note Manifest
             </p>
             <h2 className="balanced max-w-xl text-5xl font-black leading-[0.96] tracking-[-0.045em] md:text-6xl">
-              Architecting Meaningful
-              <span className="block text-[var(--red)]">Signals.</span>
+              {titleLead}
+              <span className="block text-[var(--red)]">{accentWord}.</span>
             </h2>
             <p className="mt-8 max-w-2xl pretty text-base leading-7 text-[var(--muted)]">
-              How AI changes creative workflows when used as a system, not a
-              shortcut. The useful shift is a clearer relationship between
-              intent, material, and review.
+              {post.excerpt}
             </p>
             <Link
-              href="/blog"
+              href={`/blog/${post.slug}`}
               className="mt-10 inline-flex h-11 items-center bg-[var(--red)] px-6 text-[11px] font-black uppercase tracking-[0.18em] text-white transition hover:bg-[#9e1c1c]"
             >
               Read Signal

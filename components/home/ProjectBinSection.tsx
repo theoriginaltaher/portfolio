@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { SectionLabel } from "./SectionLabel";
+import type { Project } from "@/src/types";
 
-const pathways = [
+const pathwayDefinitions = [
   {
     code: "01_INDEX_SYSTEMS",
     title: "Digital Systems Lab",
@@ -53,7 +54,18 @@ const pathways = [
   },
 ];
 
-export function ProjectBinSection() {
+export function ProjectBinSection({ projects }: { projects: Project[] }) {
+  const systems = projects.filter((project) => project.category === "systems");
+  const media = projects.filter((project) => project.category === "media");
+  const pathways = pathwayDefinitions.map((pathway, index) => {
+    if (index === 0 && systems[0]) {
+      return { ...pathway, description: systems[0].shortDescription, meta: `${systems.length} published systems` };
+    }
+    if (index === 1 && media[0]) {
+      return { ...pathway, description: media[0].shortDescription, meta: `${media.length} published media projects` };
+    }
+    return pathway;
+  });
   return (
     <section className="border-b hairline bg-[#060606] py-16 md:py-24" id="projects">
       <div className="site-shell max-w-6xl">

@@ -1,30 +1,14 @@
 import { SectionLabel } from "./SectionLabel";
+import type { ExperienceEntry } from "@/src/types";
 
-const tracks = [
-  {
-    name: "AI Workflows",
-    detail: "Manual pipeline integration",
-    percent: "82%",
-    color: "red",
-    notes: ["LLM Core Deployment", "Integration Orchestration"],
-  },
-  {
-    name: "Media Systems",
-    detail: "Scalable editing and storage architecture",
-    percent: "66%",
-    color: "blue",
-    notes: ["Asset Proxy Engine", "I/O Standardization"],
-  },
-  {
-    name: "Digital Platforms",
-    detail: "E-commerce and SaaS orchestration frameworks",
-    percent: "48%",
-    color: "neutral",
-    notes: ["Next Component Library", "Content Models"],
-  },
-];
-
-export function RoadmapSection() {
+export function RoadmapSection({ experience }: { experience: ExperienceEntry[] }) {
+  const tracks = experience.slice(0, 5).map((entry, index) => ({
+        name: entry.role,
+        detail: `${entry.organisation} / ${entry.dateRange}`,
+        percent: entry.current ? "100%" : "72%",
+        color: index === 0 ? "red" : index === 1 ? "blue" : "neutral",
+        notes: [entry.description],
+      }));
   return (
     <section className="border-b hairline py-16 md:py-24" id="roadmap">
       <div className="site-shell max-w-5xl">

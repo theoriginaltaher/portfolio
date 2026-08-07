@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { navItems } from "./nav-data";
 
-const socials = ["LinkedIn", "Instagram", "X"];
+const socials = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/taherhussain" },
+  { label: "Email", href: "mailto:hello@taherhussain.com" },
+];
 
 export function Footer() {
   return (
@@ -22,8 +25,8 @@ export function Footer() {
             </Link>
           ))}
           {socials.map((item) => (
-            <a key={item} href="#" className="hover:text-[var(--text)]">
-              {item}
+            <a key={item.label} href={item.href} className="hover:text-[var(--text)]" target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined}>
+              {item.label}
             </a>
           ))}
         </div>

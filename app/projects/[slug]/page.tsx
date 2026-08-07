@@ -3,26 +3,30 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
-import { systemProjects } from "@/data/projects";
+import { toSystemProject } from "@/src/lib/adapters";
+import { getProject, getProjectSlugs } from "@/src/lib/content";
 
 type ProjectPageProps = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return systemProjects.map((project) => ({ slug: project.slug }));
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  return getProjectSlugs();
 }
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = systemProjects.find((item) => item.slug === slug);
+  const project = await getProject(slug);
   return project
-    ? { title: `${project.title} | Taher Hussain`, description: project.description }
+    ? { title: `${project.title} | Taher Hussain`, description: project.shortDescription }
     : { title: "Project not found | Taher Hussain" };
 }
 
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   const { slug } = await params;
-  const project = systemProjects.find((item) => item.slug === slug && item.published);
-  if (!project) notFound();
+  const sanityProject = await getProject(slug);
+  if (!sanityProject?.published || sanityProject.category !== "systems") notFound();
+  const project = toSystemProject(sanityProject, sanityProject.order - 1);
 
   return (
     <>
@@ -55,7 +59,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           </aside>
           <article className="px-5 py-14 md:px-10 md:py-20">
             <p className="max-w-3xl balanced text-2xl font-bold leading-[1.35] tracking-[-0.02em] text-white md:text-4xl">{project.fullDescription}</p>
-            <p className="mt-10 max-w-2xl pretty text-base leading-8 text-[#aaa]">{project.description} This local project brief is ready to receive long-form Portable Text, featured media, and supporting gallery images when the Sanity project documents are connected.</p>
+            <p className="mt-10 max-w-2xl pretty text-base leading-8 text-[#aaa]">{project.description}</p>
             <div className="mt-14 border-t border-white/[0.08] pt-7">
               <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/36">Built with</p>
               <div className="mt-5 flex flex-wrap gap-2">{project.tools.map((tool) => <span key={tool} className="border border-white/10 px-3 py-2 text-xs font-semibold text-white/72">{tool}</span>)}</div>

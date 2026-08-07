@@ -17,6 +17,10 @@
   --blue-quiet: #6f88a8;
   --blue-border: rgba(96, 128, 168, 0.5);
   --blue-soft: rgba(59, 88, 124, 0.12);
+  /* Compatibility aliases for newer non-reference routes. */
+  --accent: var(--red);
+  --accent-strong: #9e1c1c;
+  --accent-soft: var(--red-soft);
 }
 
 * {
@@ -98,6 +102,27 @@ textarea {
 
   .pretty {
     text-wrap: pretty;
+  }
+
+  .article-body {
+    max-width: 72ch;
+    padding-top: clamp(2.5rem, 6vw, 5rem);
+    color: var(--muted);
+    font-size: 1.0625rem;
+    line-height: 1.9;
+  }
+
+  .article-body p + p {
+    margin-top: 1.5rem;
+  }
+
+  .article-body h2 {
+    margin-block: 3rem 1rem;
+    color: var(--text);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.035em;
   }
 
   .media-grid {

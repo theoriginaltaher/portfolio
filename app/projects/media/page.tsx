@@ -3,14 +3,19 @@ import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { MediaGallery } from "@/components/projects/MediaGallery";
-import { mediaItems } from "@/data/projects";
+import { toMediaItems } from "@/src/lib/adapters";
+import { getProjectsByCategory } from "@/src/lib/content";
 
 export const metadata: Metadata = {
   title: "Media Gallery | Taher Hussain",
   description: "An interactive selection of stills and visual production work by Taher Hussain.",
 };
 
-export default function MediaPage() {
+export const revalidate = 60;
+
+export default async function MediaPage() {
+  const projects = await getProjectsByCategory("media");
+  const mediaItems = toMediaItems(projects);
   return (
     <>
       <Navbar />

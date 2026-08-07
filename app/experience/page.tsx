@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageFrame } from "@/components/pages/PageFrame";
+import { getExperience, getSkills } from "@/src/lib/content";
 
 export const metadata: Metadata = {
   title: "Journey & Expertise | Taher Hussain",
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
     "Taher Hussain's experience across AI-powered multimedia, video, design, cloud infrastructure, technology leadership, and creative production.",
 };
 
-const professionalExperience = [
+const fallbackProfessionalExperience = [
   {
     title: "Co-Founder",
     organization: "Space Digital",
@@ -50,7 +51,7 @@ const professionalExperience = [
   },
 ];
 
-const leadershipChapters = [
+const fallbackLeadershipChapters = [
   {
     role: "Vice President",
     organization: "The ICT & Media Society · Burhani Serendib School",
@@ -244,7 +245,34 @@ function RailHeading({ children }: Readonly<{ children: React.ReactNode }>) {
   );
 }
 
-export default function ExperiencePage() {
+export const revalidate = 60;
+
+export default async function ExperiencePage() {
+  const [cmsExperience, cmsSkills] = await Promise.all([getExperience(), getSkills()]);
+  const workEntries = cmsExperience.filter((entry) => entry.category === "work");
+  const leadershipEntries = cmsExperience.filter((entry) => entry.category === "leadership");
+  const professionalExperience = workEntries.length
+    ? workEntries.map((entry) => ({
+        title: entry.role,
+        organization: entry.organisation,
+        location: "Sri Lanka · Hybrid",
+        period: entry.dateRange,
+        status: entry.current ? "Current" : "Completed",
+        description: entry.description,
+        tags: [entry.category === "work" ? "Professional" : "Leadership"],
+      }))
+    : process.env.NODE_ENV !== "production" ? fallbackProfessionalExperience : [];
+  const leadershipChapters = leadershipEntries.length
+    ? leadershipEntries.map((entry) => ({
+        role: entry.role,
+        organization: entry.organisation,
+        period: entry.dateRange,
+        summary: entry.description,
+      }))
+    : process.env.NODE_ENV !== "production" ? fallbackLeadershipChapters : [];
+  const renderedSkillGroups = cmsSkills.length
+    ? [{ title: "Core Capabilities", skills: cmsSkills.map((skill) => skill.label) }]
+    : process.env.NODE_ENV !== "production" ? skillGroups : [];
   return (
     <PageFrame>
       <main className="min-h-screen bg-[var(--background)] pt-14">
@@ -391,7 +419,7 @@ export default function ExperiencePage() {
             <section>
               <RailHeading>Skills Directory</RailHeading>
               <div className="space-y-6">
-                {skillGroups.map((group) => (
+                {renderedSkillGroups.map((group) => (
                   <div key={group.title}>
                     <h3 className="mb-3 text-[9px] font-black uppercase tracking-[0.16em] text-[var(--red)]">{group.title}</h3>
                     <div className="flex flex-wrap gap-2">

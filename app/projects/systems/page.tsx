@@ -3,14 +3,19 @@ import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { SystemsShowcase } from "@/components/projects/SystemsShowcase";
-import { systemProjects } from "@/data/projects";
+import { toSystemProject } from "@/src/lib/adapters";
+import { getProjectsByCategory } from "@/src/lib/content";
 
 export const metadata: Metadata = {
   title: "Digital Systems | Taher Hussain",
   description: "Selected digital systems, platforms, workflows, and technical prototypes by Taher Hussain.",
 };
 
-export default function SystemsPage() {
+export const revalidate = 60;
+
+export default async function SystemsPage() {
+  const projects = await getProjectsByCategory("systems");
+  const systemProjects = projects.map(toSystemProject);
   return (
     <>
       <Navbar />

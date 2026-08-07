@@ -3,19 +3,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
+import { getProjectsByCategory } from "@/src/lib/content";
 
 export const metadata: Metadata = {
   title: "Projects | Taher Hussain",
   description: "Explore Taher Hussain's digital systems and selected media work.",
 };
 
-const pathways = [
+const pathwayDefinitions = [
   {
     index: "A",
     title: "Digital Systems",
     href: "/projects/systems",
     description: "AI workflows, web platforms, cloud tools, and technical prototypes built to work beyond the demo.",
-    meta: "4 selected systems",
     accent: "red",
   },
   {
@@ -23,12 +23,21 @@ const pathways = [
     title: "Media Gallery",
     href: "/projects/media",
     description: "Frames, motion studies, and production moments from an evolving visual archive.",
-    meta: "6 selected frames",
     accent: "blue",
   },
 ] as const;
 
-export default function ProjectsPage() {
+export const revalidate = 60;
+
+export default async function ProjectsPage() {
+  const [systems, media] = await Promise.all([
+    getProjectsByCategory("systems"),
+    getProjectsByCategory("media"),
+  ]);
+  const pathways = pathwayDefinitions.map((path, index) => ({
+    ...path,
+    meta: index === 0 ? `${systems.length} selected systems` : `${media.length} selected projects`,
+  }));
   return (
     <>
       <Navbar />
