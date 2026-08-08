@@ -222,6 +222,13 @@ const recognition = [
   },
 ];
 
+const professionalPresentation = {
+  "Co-Founder": { location: "Colombo, Western Province · On-site", status: "Current", tags: ["Co-founder", "Colombo", "On-site"] },
+  "Founder & Creative Technologist": { location: "Western Province, Sri Lanka · Hybrid", status: "Active practice", tags: ["AI", "Media production", "Web design", "Client delivery"] },
+  "Chief Technology Officer": { location: "Sri Lanka · Hybrid", status: "Leadership", tags: ["Technology management", "Technology leadership", "AI workflows"] },
+  "Head of Information Technology & Media": { location: "Sri Lanka · Hybrid", status: "Progression", tags: ["Website administration", "Artificial intelligence", "Cloud tools"] },
+} as const;
+
 function SectionHeading({ children, id }: Readonly<{ children: React.ReactNode; id?: string }>) {
   return (
     <div className="mb-7 flex items-center gap-4 sm:mb-9">
@@ -260,6 +267,9 @@ export default async function ExperiencePage() {
         status: entry.current ? "Current" : "Completed",
         description: entry.description,
         tags: [entry.category === "work" ? "Professional" : "Leadership"],
+      })).map((item) => ({
+        ...item,
+        ...(professionalPresentation[item.title as keyof typeof professionalPresentation] ?? {}),
       }))
     : process.env.NODE_ENV !== "production" ? fallbackProfessionalExperience : [];
   const leadershipChapters = leadershipEntries.length

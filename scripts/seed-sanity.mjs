@@ -79,6 +79,42 @@ const experiences = [
 
 const skills = ["AI & Automation", "Multimedia Production", "Video & Photography", "Graphic Design", "Web Development", "Cloud Infrastructure", "Robotics", "Event Media", "Digital Strategy"].map((label, index) => ({ _id: `skill-${index + 1}`, _type: "skill", label, order: index + 1 }));
 
+Object.assign(experiences.find(({ _id }) => _id === "experience-thc"), {
+  dateRange: "Jul 2018 · Present",
+  order: 2,
+  description: "Built a one-person creative practice into a service business spanning video production, graphic design, photography, web development, and AI-assisted content creation. Leads each engagement from client brief and creative direction through production and delivery.",
+});
+Object.assign(experiences.find(({ _id }) => _id === "experience-cto"), {
+  dateRange: "Dec 2024 · Present",
+  order: 3,
+  description: "Leads Starsons’ digital presence across web, social content, brand visuals, photography, and video. Makes executive technology decisions while remaining hands-on with production and AI-supported creative workflows.",
+});
+Object.assign(experiences.find(({ _id }) => _id === "experience-it"), {
+  dateRange: "Jun 2019 · Dec 2024",
+  order: 4,
+  description: "Built and ran Starsons’ digital operation from the ground up, including the website, content calendar, branded visuals, social media, photography, and video production. Introduced AI and cloud tools that improved turnaround and established the team’s operating workflow.",
+});
+Object.assign(experiences.find(({ _id }) => _id === "experience-ict"), {
+  dateRange: "Jul 2025 · Present",
+  order: 1,
+  organisation: "The ICT & Media Society · Burhani Serendib School",
+  description: "Supports society activities with a focus on media, production, practical sessions, and student-led projects.",
+});
+Object.assign(experiences.find(({ _id }) => _id === "experience-interact"), {
+  dateRange: "Jul 2024 · Aug 2025",
+  order: 5,
+  organisation: "The Interact Club · Burhani Serendib School",
+  description: "Led external communications, editorial consistency, promotional content, trailers, highlight reels, and event videos across a full club year.",
+});
+experiences.push(
+  { _id: "experience-space", _type: "experience", role: "Co-Founder", organisation: "Space Digital", dateRange: "May 2026 · Present", description: "Co-founded Space Digital, working on-site in Colombo, Sri Lanka.", category: "work", order: 1, current: true },
+  { _id: "experience-memento", _type: "experience", role: "Project Chairman", organisation: "Memento | Relive The Past", dateRange: "Oct 2021 · Present", description: "Leads a school-history initiative, coordinating research, content direction, web design, interviews, and archival contributions.", category: "leadership", order: 2, current: true },
+  { _id: "experience-ashara-1447", _type: "experience", role: "Head of IT Support & Core Team Member · IT Department", organisation: "The Ashara Mubaraka Project · 1447H Relay Center (Colombo)", dateRange: "May 2025 · Aug 2025", description: "Handled infrastructure setup, technical support, and coordination with other departments throughout the event.", category: "leadership", order: 3, current: false },
+  { _id: "experience-ashara-1446", _type: "experience", role: "Team Leader · IT Helpdesk", organisation: "The Ashara Mubaraka Project · 1446H Relay Center (Colombo)", dateRange: "Jun 2024 · Oct 2024", description: "Kept event technology running by troubleshooting network issues, resolving printer problems, and restoring disrupted services quickly.", category: "leadership", order: 4, current: false },
+  { _id: "experience-video-team", _type: "experience", role: "Assistant Production Manager", organisation: "The Video Team · Colombo", dateRange: "Jan 2015 · Dec 2020", description: "Developed an early foundation in video production through community and religious events, progressing from camera operation and basic editing to assisting with production logistics.", category: "leadership", order: 6, current: false },
+);
+skills.splice(0, skills.length, ...["Project Management", "Artificial Intelligence (AI)", "Cloud Computing", "Multimedia", "Entrepreneurship", "Graphic Design", "Video Production", "Event Photography", "Web Design", "WordPress", "WooCommerce", "HTML / CSS", "Technology Leadership", "Website Administration"].map((label, index) => ({ _id: `skill-${index + 1}`, _type: "skill", label, order: index + 1 })));
+
 const posts = [
   { _id: "post-signals", _type: "post", title: "Architecting Meaningful Signals", slug: { _type: "slug", current: "architecting-meaningful-signals" }, excerpt: "How AI becomes useful in creative work when intent, source material, and review are designed as one system.", publishedAt: "2026-07-18T09:00:00.000Z", readingTime: 6, body: [block("AI is most useful when it strengthens a workflow instead of becoming the workflow.", "signals-1"), block("A reliable creative system begins with a clear input contract, deliberate constraints, and human review.", "signals-2")], coverImage: imageDocuments["taher-hero-camera.png"] },
   { _id: "post-memory", _type: "post", title: "Digital Systems Need Operating Memory", slug: { _type: "slug", current: "digital-systems-need-operating-memory" }, excerpt: "Documentation works best when it records why a system behaves as it does, not only what buttons to press.", publishedAt: "2026-06-29T09:00:00.000Z", readingTime: 5, body: [block("Most systems slowly lose the reasoning that shaped them.", "memory-1"), block("Operating memory preserves ownership, naming rules, failure paths, and the reasons exceptions exist.", "memory-2")], coverImage: imageDocuments["taher-portrait-hero-color.png"] },
