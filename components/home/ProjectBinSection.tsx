@@ -25,7 +25,7 @@ const pathwayDefinitions = [
     code: "Experience",
     title: "Experience",
     description: "Interfaces, service journeys, and usable systems shaped around people.",
-    href: "/projects",
+    href: "/experience",
     meta: "UX / Interfaces / Service",
   },
   {
