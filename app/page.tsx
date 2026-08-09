@@ -27,7 +27,7 @@ export default async function Home() {
         <FeaturedSignalSection post={posts[0]} />
         <ContactComposerSection />
       </main>
-      <Footer />
+      <Footer minimal />
     </>
   );
 }

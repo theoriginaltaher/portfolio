@@ -7,12 +7,12 @@ export function FeaturedSignalSection({ post }: { post?: BlogPost }) {
   const accentWord = titleParts.pop() || "Signals";
   const titleLead = titleParts.join(" ");
   return (
-    <section className="border-b hairline py-16 md:py-24" id="signal">
-      <div className="site-shell grid-field flex items-center justify-center px-4 py-10 md:py-16">
-        <article className="panel grid w-full max-w-4xl overflow-hidden md:grid-cols-[1fr_260px]">
-          <div className="p-8 md:p-14">
+    <section className="border-b hairline py-14 md:py-20" id="signal">
+      <div className="site-shell max-w-[1440px]">
+        <article className="grid overflow-hidden border-y border-[var(--border-strong)] md:grid-cols-[minmax(0,1fr)_300px]">
+          <div className="py-10 pr-0 md:py-14 md:pr-14">
             <p className="mb-8 text-[11px] font-black uppercase tracking-[0.18em] text-[var(--blue-quiet)]">
-              Signal Lab / Note Manifest
+              Selected Signal
             </p>
             <h2 className="balanced max-w-xl text-5xl font-black leading-[0.96] tracking-[-0.045em] md:text-6xl">
               {titleLead}
@@ -28,24 +28,9 @@ export function FeaturedSignalSection({ post }: { post?: BlogPost }) {
               Read Signal
             </Link>
           </div>
-          <aside className="border-t hairline p-8 text-sm md:border-l md:border-t-0">
-            <p className="mb-8 text-[11px] uppercase tracking-[0.16em] text-[var(--dim)]">
-              Note Attributes
-            </p>
-            <div className="space-y-8">
-              <div>
-                <p className="text-[var(--dim)]">Focus</p>
-                <p className="mt-2 text-[var(--text)]">Low signal, high fidelity</p>
-              </div>
-              <div>
-                <p className="text-[var(--dim)]">Discipline</p>
-                <p className="mt-2 text-[var(--red)]">Workflow architecture</p>
-              </div>
-              <div>
-                <p className="text-[var(--dim)]">Output</p>
-                <p className="mt-2 text-[var(--blue-quiet)]">Notes / Case file</p>
-              </div>
-            </div>
+          <aside className="border-t hairline py-8 text-sm md:border-l md:border-t-0 md:px-8 md:py-14">
+            <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[var(--blue-quiet)]">Notes on AI, media, systems, and operations.</p>
+            <p className="mt-5 leading-6 text-[var(--muted)]">A short field note from the work behind the visible output.</p>
           </aside>
         </article>
       </div>

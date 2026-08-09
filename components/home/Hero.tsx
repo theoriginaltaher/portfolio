@@ -13,9 +13,9 @@ export function Hero({ settings }: { settings: SiteSettings }) {
     <section className="relative overflow-hidden border-b hairline bg-[#060606] px-0 pb-4 pt-[72px] md:pb-7 md:pt-[84px]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_40%,rgba(59,88,124,0.16),transparent_30rem),radial-gradient(circle_at_8%_90%,rgba(176,32,32,0.08),transparent_24rem)]" />
 
-      <div className="relative mx-3.5 max-w-[1320px] md:mx-auto md:w-[calc(100%_-_28px)]">
-        <div className="relative flex min-h-[auto] flex-col justify-between overflow-hidden rounded-[18px] border border-[var(--border-strong)] bg-[#0a0b0c] p-5 md:min-h-[min(720px,calc(100svh-132px))] md:rounded-[30px] md:p-9">
-          <div className="absolute bottom-0 right-0 top-0 hidden w-[46%] overflow-hidden rounded-br-[30px] rounded-tl-[180px] bg-[#101215] lg:block">
+      <div className="site-shell relative max-w-[1440px]">
+        <div className="relative flex min-h-[auto] flex-col justify-between overflow-hidden border border-[var(--border-strong)] bg-[#0a0b0c] p-5 md:min-h-[min(720px,calc(100svh-132px))] md:p-9">
+          <div className="absolute bottom-0 right-0 top-0 hidden w-[46%] overflow-hidden bg-[#101215] lg:block">
             <Image
               src="/assets/taher-hero-camera.png"
               alt=""
@@ -55,7 +55,7 @@ export function Hero({ settings }: { settings: SiteSettings }) {
                 <span className="text-[var(--red)]">/</span>
                 <span>Chief Technology Officer</span>
               </p>
-              <p className="mt-4 max-w-lg pretty text-[14px] leading-[1.75] text-[#a8adb5] md:text-base">
+              <p className="mt-4 max-w-lg break-words pretty text-[14px] leading-[1.75] text-[#a8adb5] md:text-base">
                 {summary || "I design, build, and manage digital solutions across web development, multimedia production, AI-assisted systems, and technology-driven business operations."}
               </p>
               <div className="mt-6 flex flex-col gap-2.5 min-[560px]:flex-row min-[560px]:flex-wrap md:mt-7">
@@ -93,7 +93,7 @@ export function Hero({ settings }: { settings: SiteSettings }) {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-x-5 gap-y-2 px-1.5 pt-3.5 text-[9px] font-bold uppercase tracking-[0.16em] text-[var(--dim)]">
+        <div className="flex flex-wrap items-center justify-between gap-x-5 gap-y-2 pt-3.5 text-[9px] font-bold uppercase tracking-[0.16em] text-[var(--dim)]">
           <span className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-[#20c56b]" />
             System Ready

@@ -49,21 +49,21 @@ export function ProjectBinSection({ projects }: { projects: Project[] }) {
   });
   return (
     <section className="border-b hairline bg-[#060606] py-12 sm:py-14 md:py-20" id="projects">
-      <div className="site-shell max-w-6xl">
+      <div className="site-shell max-w-[1440px]">
         <div className="mb-8 flex flex-col justify-between gap-3 sm:mb-10 md:flex-row md:items-end">
           <SectionLabel index="03 /" label="Project_Bin.index" />
           <p className="text-[11px] uppercase tracking-[0.16em] text-[var(--dim)]">
-            Systems / Media / Writing
+            Systems / Media / Experience / Writing
           </p>
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-          {pathways.map((item) => (
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          {pathways.map((item, index) => (
             <Link
               key={item.title}
               href={item.href}
               className={
-                "group panel relative flex min-h-[190px] flex-col overflow-hidden p-5 transition hover:border-[var(--border-strong)] sm:min-h-[210px] sm:p-6"
+                `group panel relative flex min-h-[190px] flex-col overflow-hidden p-5 transition hover:border-[var(--border-strong)] sm:min-h-[210px] sm:p-6 ${index === 0 ? "border-[var(--border-strong)] bg-[var(--panel-raised)]" : ""}`
               }
             >
               <div className="absolute right-5 top-5 text-sm text-[var(--dim)] transition group-hover:text-[var(--red)] sm:right-6 sm:top-6">

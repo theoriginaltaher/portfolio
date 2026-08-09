@@ -59,15 +59,15 @@ export function ContactComposerSection() {
           Initialize Collaboration
         </h2>
         <p className="mx-auto mt-6 max-w-2xl pretty text-base leading-7 text-[var(--muted)]">
-          Query availability for high-capacity technical partnerships and digital
-          infrastructure design. One reply, from me, within 48 hours.
+          For AI workflows, media production, storytelling, web systems, and digital
+          operations. One reply, from me, within 48 hours.
         </p>
         <p className="mt-5 text-[clamp(0.95rem,2vw,1.15rem)] tracking-[-0.01em]">
           <a
-            href="mailto:hello@taherhussain.com"
+            href="mailto:taher.hussain@outlook.com"
             className="border-b border-[var(--red)] pb-1 text-[var(--text)] transition hover:text-[var(--red)]"
           >
-            hello@taherhussain.com
+            taher.hussain@outlook.com
           </a>
         </p>
 
@@ -77,11 +77,8 @@ export function ContactComposerSection() {
           noValidate
         >
           <div className="flex h-12 items-center justify-between border-b hairline px-5 text-[11px] uppercase tracking-[0.16em] text-[var(--dim)]">
-            <span>new_message.txt</span>
-            <span className="flex items-center gap-2">
-              <span className="h-1 w-1 bg-[#20c56b]" />
-              secure
-            </span>
+            <span>New message</span>
+            <span>Direct contact</span>
           </div>
           <div className="space-y-5 p-4 sm:p-6 md:p-8">
             <label className="grid gap-2.5 text-xs uppercase tracking-[0.14em] text-[var(--muted)]">
@@ -156,7 +153,7 @@ export function ContactComposerSection() {
                   ? "Delivery unavailable, email directly"
                   : status === "submitting"
                     ? "Transmitting request"
-                    : "Encrypted / Direct"}
+                    : "Direct contact"}
             </span>
             <button
               type="submit"
