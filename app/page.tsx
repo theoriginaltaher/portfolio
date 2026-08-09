@@ -5,7 +5,6 @@ import { FeaturedSignalSection } from "@/components/home/FeaturedSignalSection";
 import { Hero } from "@/components/home/Hero";
 import { ManifestoSection } from "@/components/home/ManifestoSection";
 import { ProjectBinSection } from "@/components/home/ProjectBinSection";
-import { RoadmapSection } from "@/components/home/RoadmapSection";
 import { getFeaturedProjects, getPosts, getSiteSettings } from "@/src/lib/content";
 
 export const revalidate = 60;
@@ -23,7 +22,6 @@ export default async function Home() {
         <Hero settings={settings} />
         <ManifestoSection />
         <ProjectBinSection projects={projects} />
-        <RoadmapSection />
         <FeaturedSignalSection post={posts[0]} />
         <ContactComposerSection />
       </main>
