@@ -37,7 +37,7 @@ type InnerPageProps = {
 function PageHero({ eyebrow, title, summary, stats }: InnerPageProps) {
   return (
     <section className="border-b hairline pt-32">
-      <div className="site-shell grid gap-10 pb-20 md:grid-cols-[minmax(0,1fr)_320px] md:pb-24">
+      <div className="site-shell grid gap-10 pb-16 md:grid-cols-[minmax(0,1fr)_360px] md:pb-20">
         <div>
           <p className="mb-6 text-[11px] font-black uppercase tracking-[0.2em] text-[var(--red)]">
             {eyebrow}
@@ -50,11 +50,8 @@ function PageHero({ eyebrow, title, summary, stats }: InnerPageProps) {
           </p>
         </div>
 
-        <aside className="panel self-end p-6">
-          <p className="mb-6 text-[10px] font-black uppercase tracking-[0.18em] text-[var(--blue-quiet)]">
-            Page Index
-          </p>
-          <div className="space-y-5">
+        <aside className="self-end border-t border-[var(--border-strong)] pt-5">
+          <div className="grid gap-4 sm:grid-cols-3 md:grid-cols-1">
             {(stats ?? []).map((item) => (
               <div key={item.label} className="border-b border-white/6 pb-4 last:border-b-0 last:pb-0">
                 <p className="text-[10px] uppercase tracking-[0.16em] text-[var(--dim)]">
@@ -79,27 +76,19 @@ export function InnerPage(props: InnerPageProps) {
     <main className="min-h-screen bg-[#060606]">
       <PageHero {...props} />
 
-      <section className="border-b hairline py-20 md:py-28">
-        <div className="site-shell grid gap-12 lg:grid-cols-[1fr_320px]">
-          <div className="grid gap-4 md:grid-cols-2">
-            {primaryItems.map((item, index) => {
+      <section className="border-b hairline py-14 md:py-20">
+        <div className="site-shell grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
+          <div className="grid gap-px border border-[var(--border)] bg-[var(--border)] md:grid-cols-2">
+            {primaryItems.map((item) => {
               const content = (
                 <>
-                  <div className="mb-12 flex items-center justify-between text-[11px] uppercase tracking-[0.16em] text-[var(--dim)]">
-                    <span>{String(index + 1).padStart(2, "0")}_module</span>
-                    <span>/+</span>
-                  </div>
+                  <p className="mb-7 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--dim)]">{item.meta}</p>
                   <h2 className="text-3xl font-black tracking-[-0.04em]">
                     {item.title}
                   </h2>
                   <p className="mt-4 pretty text-base leading-7 text-[var(--muted)]">
                     {item.description}
                   </p>
-                  {item.meta ? (
-                    <p className="mt-8 text-[11px] uppercase tracking-[0.16em] text-[var(--dim)]">
-                      {item.meta}
-                    </p>
-                  ) : null}
                 </>
               );
 
@@ -107,19 +96,19 @@ export function InnerPage(props: InnerPageProps) {
                 <Link
                   key={item.title}
                   href={item.href}
-                  className="panel min-h-64 p-8 transition hover:border-[var(--border-strong)]"
+                  className="min-h-56 bg-[var(--panel-muted)] p-6 transition hover:bg-[var(--panel)] md:p-8"
                 >
                   {content}
                 </Link>
               ) : (
-                <article key={item.title} className="panel min-h-64 p-8">
+                <article key={item.title} className="min-h-56 bg-[var(--panel-muted)] p-6 md:p-8">
                   {content}
                 </article>
               );
             })}
           </div>
 
-          <aside className="panel h-fit p-7">
+          <aside className="h-fit border-t border-[var(--border-strong)] pt-5">
             <p className="mb-6 text-[10px] font-black uppercase tracking-[0.18em] text-[var(--red)]">
               {sideTitle ?? "Operating Notes"}
             </p>

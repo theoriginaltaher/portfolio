@@ -76,7 +76,7 @@ textarea {
 
 @layer utilities {
   .site-shell {
-    width: min(100% - 40px, 1220px);
+    width: min(100% - 40px, 1440px);
     margin-inline: auto;
   }
 
@@ -134,6 +134,18 @@ textarea {
 
   .media-tile {
     min-height: 24rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .site-shell {
+    width: min(100% - 64px, 1440px);
+  }
+}
+
+@media (min-width: 1280px) {
+  .site-shell {
+    width: min(100% - 96px, 1440px);
   }
 }
 

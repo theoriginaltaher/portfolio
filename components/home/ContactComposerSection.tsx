@@ -51,7 +51,7 @@ export function ContactComposerSection() {
 
   return (
     <section className="py-16 md:py-24" id="contact">
-      <div className="site-shell max-w-5xl text-center">
+      <div className="site-shell max-w-[1440px] text-center">
         <p className="mb-4 text-[11px] font-black uppercase tracking-[0.2em] text-[var(--red)]">
           New Commit Interface
         </p>
@@ -72,7 +72,7 @@ export function ContactComposerSection() {
         </p>
 
         <form
-          className="panel mx-auto mt-10 max-w-3xl overflow-hidden text-left md:mt-12"
+          className="panel mx-auto mt-10 max-w-4xl overflow-hidden text-left md:mt-12"
           onSubmit={handleSubmit}
           noValidate
         >
