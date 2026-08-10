@@ -52,42 +52,36 @@ const leadershipExperience = [
     organization: "ICT & Media Society, Burhani Serendib School",
     period: "2025/26",
     impact: "Helped direct student-led media, practical sessions, and technical projects.",
-    tag: "Student leadership",
   },
   {
     role: "Project Chairman",
     organization: "Innov8 Rise In Tech",
     period: "2025",
     impact: "Led the project from planning and team coordination through technical delivery.",
-    tag: "Project leadership",
   },
   {
     role: "Head of IT Support & Core Team Member",
     organization: "Ashara Mubaraka Project, 1447H Relay Center",
     period: "May – Aug 2025",
     impact: "Coordinated infrastructure setup and live technical support across departments.",
-    tag: "IT operations",
   },
   {
     role: "Team Leader, IT Helpdesk",
     organization: "Ashara Mubaraka Project, 1446H Relay Center",
     period: "Jun – Oct 2024",
     impact: "Kept event technology running by resolving network, printer, and service issues.",
-    tag: "Technical support",
   },
   {
     role: "Editor & Director of Public Relations",
     organization: "Interact Club, Burhani Serendib School",
     period: "Jul 2024 – Aug 2025",
     impact: "Directed public communications, editorial output, promotions, and event media.",
-    tag: "Communications",
   },
   {
     role: "Assistant Production Manager",
     organization: "The Video Team, Colombo",
     period: "Jan 2015 – Dec 2020",
     impact: "Supported camera work, editing, and production logistics for community events.",
-    tag: "Production",
   },
 ];
 
@@ -190,7 +184,7 @@ const recognition = [
 
 function SectionHeading({ children, id }: Readonly<{ children: React.ReactNode; id: string }>) {
   return (
-    <div className="mb-8 flex items-end gap-5 border-b border-[var(--border-strong)] pb-5 sm:mb-10">
+    <div className="mb-7 flex items-end gap-5 border-b border-[var(--border-strong)] pb-4 sm:mb-8">
       <h2 id={id} className="balanced text-2xl font-black tracking-[-0.035em] sm:text-3xl">
         {children}
       </h2>
@@ -204,7 +198,7 @@ export default function ExperiencePage() {
     <PageFrame>
       <main className="min-h-screen bg-[var(--background)] pt-14">
         <header className="border-b border-[var(--border)]">
-          <div className="site-shell py-16 sm:py-20 lg:py-24">
+          <div className="site-shell py-12 sm:py-16 lg:py-20">
             <div className="mx-auto max-w-[1320px]">
               <h1 className="balanced max-w-5xl text-[clamp(2.8rem,7vw,5.75rem)] font-black leading-[0.94] tracking-[-0.04em]">
                 Journey <span className="font-light text-[var(--blue-quiet)]">&amp;</span>{" "}
@@ -214,7 +208,7 @@ export default function ExperiencePage() {
                 Founder of TaherHussainCreations, Co-Founder at Space Digital, and CTO at Staroons’ Group. Taher’s work spans AI-powered multimedia, digital infrastructure, creative systems, and leadership across school, community, and technical environments.
               </p>
               <div
-                className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--dim)] sm:text-[11px]"
+                className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 text-[11px] font-bold uppercase tracking-[0.12em] text-[#777d85]"
                 aria-label="Experience focus areas"
               >
                 {(["Technology", "Media", "Leadership", "Systems"] as const).map((item, index) => (
@@ -228,26 +222,25 @@ export default function ExperiencePage() {
           </div>
         </header>
 
-        <div className="site-shell py-20 sm:py-24 lg:py-28">
-          <div className="mx-auto max-w-[1320px] space-y-24 sm:space-y-28 lg:space-y-32">
+        <div className="site-shell py-16 sm:py-20 lg:py-24">
+          <div className="mx-auto max-w-[1320px] space-y-20 sm:space-y-24 lg:space-y-28">
             <section aria-labelledby="professional-experience">
               <SectionHeading id="professional-experience">Professional Experience</SectionHeading>
               <div className="relative lg:pl-14">
                 <span className="absolute bottom-6 left-[11px] top-6 hidden w-px bg-[var(--border-strong)] lg:block" aria-hidden="true" />
-                <div className="space-y-5">
-                  {professionalExperience.map((item, index) => (
+                <div className="space-y-6">
+                  {professionalExperience.map((item) => (
                     <article
                       key={`${item.role}-${item.organization}`}
-                      className="group relative border border-[var(--border-strong)] bg-[var(--panel-muted)] p-6 transition-colors duration-300 hover:bg-[var(--panel)] sm:p-8 lg:grid lg:grid-cols-[minmax(230px,0.72fr)_minmax(0,1.45fr)] lg:gap-10"
+                      className="group relative min-w-0 border border-[var(--border-strong)] bg-[var(--panel-muted)] p-6 transition-colors duration-300 hover:bg-[var(--panel)] sm:p-8 lg:grid lg:grid-cols-[minmax(240px,0.72fr)_minmax(0,1.45fr)] lg:gap-12"
                     >
                       <span className="absolute -left-[47px] top-8 hidden size-3 border border-[var(--red)] bg-[var(--background)] lg:block" aria-hidden="true" />
                       <div>
-                        <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--red)]">Role {String(index + 1).padStart(2, "0")}</p>
-                        <h3 className="balanced mt-4 text-xl font-black leading-tight tracking-[-0.03em] sm:text-2xl">{item.role}</h3>
+                        <h3 className="balanced text-xl font-black leading-tight tracking-[-0.03em] sm:text-2xl">{item.role}</h3>
                         <p className="mt-2 text-sm font-semibold text-[var(--blue-quiet)]">{item.organization}</p>
                       </div>
                       <div className="mt-6 border-t border-[var(--border)] pt-6 lg:mt-0 lg:border-t-0 lg:pt-0">
-                        <div className="flex flex-col gap-1 text-xs sm:flex-row sm:items-center sm:gap-3">
+                        <div className="flex flex-col gap-1 text-sm sm:flex-row sm:items-center sm:gap-3">
                           <p className="font-bold text-[#d5d7da]">{item.period}</p>
                           <span className="hidden text-[var(--red)] sm:inline" aria-hidden="true">/</span>
                           <p className="text-[var(--muted)]">{item.context}</p>
@@ -255,7 +248,7 @@ export default function ExperiencePage() {
                         <p className="pretty mt-5 max-w-[68ch] text-sm leading-7 text-[#aeb3ba] sm:text-[15px]">{item.description}</p>
                         <div className="mt-6 flex flex-wrap gap-2">
                           {item.capabilities.map((capability) => (
-                            <span key={capability} className="border border-[var(--border-strong)] px-3 py-1.5 text-[10px] font-semibold text-[#9ca3ab]">
+                            <span key={capability} className="border border-[var(--border-strong)] px-3 py-1.5 text-[11px] font-semibold text-[#aeb4bc]">
                               {capability}
                             </span>
                           ))}
@@ -271,14 +264,11 @@ export default function ExperiencePage() {
               <SectionHeading id="leadership-community">Leadership &amp; Community</SectionHeading>
               <div className="grid border border-[var(--border)] bg-[var(--border)] sm:grid-cols-2">
                 {leadershipExperience.map((item) => (
-                  <article key={`${item.role}-${item.organization}`} className="bg-[var(--background)] p-6 sm:p-7">
-                    <div className="flex items-start justify-between gap-5">
-                      <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--red)]">{item.period}</p>
-                      <span className="shrink-0 text-[9px] font-semibold uppercase tracking-[0.1em] text-[var(--dim)]">{item.tag}</span>
-                    </div>
+                  <article key={`${item.role}-${item.organization}`} className="bg-[var(--background)] p-6 sm:min-h-48 sm:p-7">
+                    <p className="text-[11px] font-bold tracking-[0.08em] text-[var(--red)]">{item.period}</p>
                     <h3 className="balanced mt-5 text-lg font-black leading-tight tracking-[-0.025em]">{item.role}</h3>
-                    <p className="mt-2 text-xs font-semibold leading-5 text-[var(--blue-quiet)]">{item.organization}</p>
-                    <p className="pretty mt-4 max-w-[58ch] text-sm leading-6 text-[var(--muted)]">{item.impact}</p>
+                    <p className="mt-2 text-sm font-semibold leading-5 text-[var(--blue-quiet)]">{item.organization}</p>
+                    <p className="pretty mt-4 max-w-[58ch] text-sm leading-6 text-[#aeb3ba]">{item.impact}</p>
                   </article>
                 ))}
               </div>
@@ -287,22 +277,22 @@ export default function ExperiencePage() {
             <section aria-labelledby="project-record">
               <SectionHeading id="project-record">Selected Project Record</SectionHeading>
               <div className="overflow-hidden border-y border-[var(--border-strong)]">
-                <div className="hidden grid-cols-[72px_minmax(180px,0.9fr)_minmax(190px,0.85fr)_110px_minmax(260px,1.35fr)] gap-5 border-b border-[var(--border-strong)] py-3 text-[9px] font-bold uppercase tracking-[0.14em] text-[var(--dim)] lg:grid">
+                <div className="hidden grid-cols-[72px_minmax(180px,0.9fr)_minmax(190px,0.85fr)_110px_minmax(260px,1.35fr)] gap-5 border-b border-[var(--border-strong)] py-3 text-[10px] font-bold uppercase tracking-[0.12em] text-[#7d838b] lg:grid">
                   <span>Code</span><span>Project</span><span>Area</span><span>Period</span><span>Record</span>
                 </div>
                 {projectRecord.map((project) => (
                   <article
                     key={project.code}
-                    className="grid gap-3 border-b border-[var(--border)] py-6 last:border-b-0 sm:grid-cols-[72px_minmax(0,1fr)] sm:gap-5 lg:grid-cols-[72px_minmax(180px,0.9fr)_minmax(190px,0.85fr)_110px_minmax(260px,1.35fr)] lg:items-start"
+                    className="grid gap-3 border-b border-[var(--border)] py-7 last:border-b-0 sm:grid-cols-[72px_minmax(0,1fr)] sm:gap-5 lg:grid-cols-[72px_minmax(180px,0.9fr)_minmax(190px,0.85fr)_110px_minmax(260px,1.35fr)] lg:items-start"
                   >
-                    <p className="text-[10px] font-black tracking-[0.12em] text-[var(--red)]">{project.code}</p>
+                    <p className="text-[11px] font-black tracking-[0.1em] text-[var(--red)]">{project.code}</p>
                     <div>
-                      <h3 className="text-sm font-bold leading-5 text-[#e4e5e7]">{project.title}</h3>
-                      <p className="mt-1 text-xs leading-5 text-[var(--blue-quiet)] lg:hidden">{project.area}</p>
+                      <h3 className="text-[15px] font-bold leading-5 text-[#e4e5e7]">{project.title}</h3>
+                      <p className="mt-1 text-[13px] leading-5 text-[var(--blue-quiet)] lg:hidden">{project.area}</p>
                     </div>
-                    <p className="hidden text-xs leading-5 text-[var(--blue-quiet)] lg:block">{project.area}</p>
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-[var(--dim)] sm:col-start-2 lg:col-start-auto">{project.period}</p>
-                    <p className="pretty text-sm leading-6 text-[var(--muted)] sm:col-start-2 lg:col-start-auto">{project.summary}</p>
+                    <p className="hidden text-[13px] leading-5 text-[var(--blue-quiet)] lg:block">{project.area}</p>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#858b93] sm:col-start-2 lg:col-start-auto">{project.period}</p>
+                    <p className="pretty text-sm leading-6 text-[#aeb3ba] sm:col-start-2 lg:col-start-auto">{project.summary}</p>
                   </article>
                 ))}
               </div>
@@ -318,12 +308,12 @@ export default function ExperiencePage() {
                 </div>
                 <div className="mt-8 space-y-8 border-t border-[var(--border)] pt-8 lg:mt-0 lg:border-t-0 lg:pt-0">
                   <div>
-                    <h4 className="text-xs font-black text-[#d7d9dc]">Academic Focus</h4>
-                    <p className="pretty mt-3 max-w-[66ch] text-sm leading-7 text-[var(--muted)]">Edexcel IGCSE May / June 2026 programme with a focus on Information Technology, Business Studies, and Economics.</p>
+                    <h4 className="text-sm font-black text-[#d7d9dc]">Academic Focus</h4>
+                    <p className="pretty mt-3 max-w-[66ch] text-[15px] leading-7 text-[#aeb3ba]">Edexcel IGCSE May / June 2026 programme with a focus on Information Technology, Business Studies, and Economics.</p>
                   </div>
                   <div>
-                    <h4 className="text-xs font-black text-[#d7d9dc]">Evidence of Practice</h4>
-                    <ul className="mt-4 space-y-3 text-sm leading-6 text-[#aeb3ba]">
+                    <h4 className="text-sm font-black text-[#d7d9dc]">Evidence of Practice</h4>
+                    <ul className="mt-4 max-w-[70ch] space-y-3 text-[15px] leading-6 text-[#b4b9c0]">
                       <li className="flex gap-3"><span className="mt-2 size-1.5 shrink-0 bg-[var(--red)]" aria-hidden="true" />Student Council Sub-Prefect in 2024/25 and Prefect in 2025/26</li>
                       <li className="flex gap-3"><span className="mt-2 size-1.5 shrink-0 bg-[var(--red)]" aria-hidden="true" />ICT &amp; Media Society: Member from 2021 to 2025 and Vice President in 2025/26</li>
                       <li className="flex gap-3"><span className="mt-2 size-1.5 shrink-0 bg-[var(--red)]" aria-hidden="true" />Interact Club: Member from 2022 to 2024 and from 2025 onward; Editor in 2024/25</li>
@@ -335,42 +325,42 @@ export default function ExperiencePage() {
 
             <section aria-labelledby="credentials-capabilities">
               <SectionHeading id="credentials-capabilities">Credentials &amp; Capabilities</SectionHeading>
-              <div className="grid gap-px border border-[var(--border)] bg-[var(--border)] md:grid-cols-2 xl:grid-cols-[1.35fr_0.85fr_0.85fr_1fr]">
+              <div className="grid gap-px border border-[var(--border)] bg-[var(--border)] sm:grid-cols-2 xl:grid-cols-[1.35fr_0.85fr_0.85fr_1fr]">
                 <div className="bg-[var(--panel-muted)] p-6 sm:p-7">
-                  <h3 className="text-sm font-black text-[#e1e3e5]">Core Capabilities</h3>
+                  <h3 className="text-[15px] font-black text-[#e1e3e5]">Core Capabilities</h3>
                   <div className="mt-5 flex flex-wrap gap-x-4 gap-y-3">
                     {coreCapabilities.map((capability) => (
-                      <span key={capability} className="text-xs leading-5 text-[#aeb3ba]">{capability}</span>
+                      <span key={capability} className="text-[13px] leading-5 text-[#b5bac1]">{capability}</span>
                     ))}
                   </div>
                 </div>
                 <div className="bg-[var(--panel-muted)] p-6 sm:p-7">
-                  <h3 className="text-sm font-black text-[#e1e3e5]">Certifications</h3>
+                  <h3 className="text-[15px] font-black text-[#e1e3e5]">Certifications</h3>
                   <ul className="mt-5 space-y-4">
                     {certifications.map((item) => (
                       <li key={item.title}>
-                        <p className="text-xs font-bold leading-5 text-[#cfd2d6]">{item.title}</p>
-                        <p className="text-[10px] leading-4 text-[var(--blue-quiet)]">{item.issuer}</p>
+                        <p className="text-[13px] font-bold leading-5 text-[#cfd2d6]">{item.title}</p>
+                        <p className="text-xs leading-5 text-[var(--blue-quiet)]">{item.issuer}</p>
                       </li>
                     ))}
                   </ul>
                 </div>
                 <div className="bg-[var(--panel-muted)] p-6 sm:p-7">
-                  <h3 className="text-sm font-black text-[#e1e3e5]">Languages</h3>
+                  <h3 className="text-[15px] font-black text-[#e1e3e5]">Languages</h3>
                   <dl className="mt-5 space-y-3">
                     {languages.map(([language, level]) => (
                       <div key={language} className="flex items-baseline justify-between gap-3">
-                        <dt className="text-xs font-bold text-[#cfd2d6]">{language}</dt>
-                        <dd className="text-right text-[10px] text-[var(--muted)]">{level}</dd>
+                        <dt className="text-[13px] font-bold text-[#cfd2d6]">{language}</dt>
+                        <dd className="text-right text-xs text-[#aeb3ba]">{level}</dd>
                       </div>
                     ))}
                   </dl>
                 </div>
                 <div className="bg-[var(--panel-muted)] p-6 sm:p-7">
-                  <h3 className="text-sm font-black text-[#e1e3e5]">Recognition</h3>
+                  <h3 className="text-[15px] font-black text-[#e1e3e5]">Recognition</h3>
                   <ul className="mt-5 space-y-4">
                     {recognition.map((item) => (
-                      <li key={item} className="flex gap-3 text-xs font-semibold leading-5 text-[#b7bcc2]">
+                      <li key={item} className="flex gap-3 text-[13px] font-semibold leading-5 text-[#b7bcc2]">
                         <span className="mt-2 size-1.5 shrink-0 bg-[var(--red)]" aria-hidden="true" />
                         {item}
                       </li>

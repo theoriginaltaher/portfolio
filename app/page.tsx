@@ -1,10 +1,9 @@
-import { Footer } from "@/components/layout/Footer";
-import { Navbar } from "@/components/layout/Navbar";
 import { ContactComposerSection } from "@/components/home/ContactComposerSection";
 import { FeaturedSignalSection } from "@/components/home/FeaturedSignalSection";
 import { Hero } from "@/components/home/Hero";
 import { ManifestoSection } from "@/components/home/ManifestoSection";
 import { ProjectBinSection } from "@/components/home/ProjectBinSection";
+import { PageFrame } from "@/components/pages/PageFrame";
 import { getFeaturedProjects, getPosts, getSiteSettings } from "@/src/lib/content";
 
 export const revalidate = 60;
@@ -16,8 +15,7 @@ export default async function Home() {
     getSiteSettings(),
   ]);
   return (
-    <>
-      <Navbar />
+    <PageFrame>
       <main>
         <Hero settings={settings} />
         <ManifestoSection />
@@ -25,7 +23,6 @@ export default async function Home() {
         <FeaturedSignalSection post={posts[0]} />
         <ContactComposerSection />
       </main>
-      <Footer minimal />
-    </>
+    </PageFrame>
   );
 }

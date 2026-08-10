@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Footer } from "@/components/layout/Footer";
-import { Navbar } from "@/components/layout/Navbar";
+import { PageFrame } from "@/components/pages/PageFrame";
 import { SystemsShowcase } from "@/components/projects/SystemsShowcase";
 import { toSystemProject } from "@/src/lib/adapters";
 import { getProjectsByCategory } from "@/src/lib/content";
@@ -17,8 +16,7 @@ export default async function SystemsPage() {
   const projects = await getProjectsByCategory("systems");
   const systemProjects = projects.map(toSystemProject);
   return (
-    <>
-      <Navbar />
+    <PageFrame>
       <main className="min-h-screen bg-[#060606] pt-14">
         <header className="site-shell grid min-h-[46svh] content-end gap-10 pb-12 pt-20 md:pb-16 lg:grid-cols-[1fr_0.55fr] lg:items-end">
           <div>
@@ -35,7 +33,6 @@ export default async function SystemsPage() {
           <SystemsShowcase projects={systemProjects} />
         </section>
       </main>
-      <Footer />
-    </>
+    </PageFrame>
   );
 }

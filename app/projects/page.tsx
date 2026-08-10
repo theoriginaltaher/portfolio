@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Footer } from "@/components/layout/Footer";
-import { Navbar } from "@/components/layout/Navbar";
+import { PageFrame } from "@/components/pages/PageFrame";
 import { getProjectsByCategory } from "@/src/lib/content";
 
 export const metadata: Metadata = {
@@ -39,8 +38,7 @@ export default async function ProjectsPage() {
     meta: index === 0 ? `${systems.length} selected systems` : `${media.length} selected projects`,
   }));
   return (
-    <>
-      <Navbar />
+    <PageFrame>
       <main className="min-h-screen bg-[#060606] pt-14">
         <header className="site-shell flex min-h-[36svh] flex-col justify-end pb-12 pt-20 md:pb-16">
           <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[var(--red)]">Project index</p>
@@ -72,7 +70,6 @@ export default async function ProjectsPage() {
           ))}
         </section>
       </main>
-      <Footer />
-    </>
+    </PageFrame>
   );
 }

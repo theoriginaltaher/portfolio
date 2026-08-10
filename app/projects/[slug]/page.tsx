@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Footer } from "@/components/layout/Footer";
-import { Navbar } from "@/components/layout/Navbar";
+import { PageFrame } from "@/components/pages/PageFrame";
 import { toSystemProject } from "@/src/lib/adapters";
 import { getProject, getProjectSlugs } from "@/src/lib/content";
 
@@ -29,8 +28,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   const project = toSystemProject(sanityProject, sanityProject.order - 1);
 
   return (
-    <>
-      <Navbar />
+    <PageFrame>
       <main className="min-h-screen bg-[#060606] pt-14">
         <header className="site-shell relative min-h-[72svh] overflow-hidden border-x border-white/[0.055] px-5 pb-12 pt-20 md:px-10 md:pb-16 md:pt-28">
           <div className="absolute inset-0 grid-field opacity-30" />
@@ -68,7 +66,6 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           </article>
         </section>
       </main>
-      <Footer />
-    </>
+    </PageFrame>
   );
 }
