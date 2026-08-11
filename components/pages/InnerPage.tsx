@@ -34,26 +34,36 @@ type InnerPageProps = {
   };
 };
 
-function PageHero({ eyebrow, title, summary, stats = [] }: InnerPageProps) {
+function PageHero({ eyebrow, title, summary, stats }: InnerPageProps) {
   return (
-    <section className="border-b hairline pt-28 sm:pt-32">
-      <div className="site-shell pb-14 md:pb-20">
-        <p className="mb-6 text-sm font-semibold text-[var(--red)]">{eyebrow}</p>
-        <h1 className="balanced max-w-5xl text-[clamp(3rem,8vw,6rem)] font-black leading-[0.92] tracking-[-0.04em]">
-          {title}
-        </h1>
-        <p className="mt-7 max-w-3xl pretty text-lg leading-8 text-[#c9ccd1]">{summary}</p>
+    <section className="border-b hairline pt-32">
+      <div className="site-shell grid gap-10 pb-16 md:grid-cols-[minmax(0,1fr)_360px] md:pb-20">
+        <div>
+          <p className="mb-6 text-[11px] font-black uppercase tracking-[0.2em] text-[var(--red)]">
+            {eyebrow}
+          </p>
+          <h1 className="balanced max-w-4xl text-[clamp(3.2rem,9vw,6rem)] font-black uppercase leading-[0.9] tracking-[-0.04em]">
+            {title}
+          </h1>
+          <p className="mt-8 max-w-3xl pretty text-lg leading-8 text-[#c9ccd1]">
+            {summary}
+          </p>
+        </div>
 
-        {stats.length > 0 ? (
-          <dl className="mt-10 grid max-w-5xl gap-5 border-t border-white/10 pt-5 sm:grid-cols-3">
-            {stats.map((item) => (
-              <div key={item.label}>
-                <dt className="text-sm text-[var(--dim)]">{item.label}</dt>
-                <dd className="mt-1 text-sm font-semibold leading-6 text-[var(--text)]">{item.value}</dd>
+        <aside className="self-end border-t border-[var(--border-strong)] pt-5">
+          <div className="grid gap-4 sm:grid-cols-3 md:grid-cols-1">
+            {(stats ?? []).map((item) => (
+              <div key={item.label} className="border-b border-white/6 pb-4 last:border-b-0 last:pb-0">
+                <p className="text-[10px] uppercase tracking-[0.16em] text-[var(--dim)]">
+                  {item.label}
+                </p>
+                <p className="mt-2 text-sm font-semibold text-[var(--text)]">
+                  {item.value}
+                </p>
               </div>
             ))}
-          </dl>
-        ) : null}
+          </div>
+        </aside>
       </div>
     </section>
   );
@@ -67,47 +77,57 @@ export function InnerPage(props: InnerPageProps) {
       <PageHero {...props} />
 
       <section className="border-b hairline py-14 md:py-20">
-        <div className="site-shell grid gap-12 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-20">
-          <div className="border-t border-white/10">
+        <div className="site-shell grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
+          <div className="grid gap-px border border-[var(--border)] bg-[var(--border)] md:grid-cols-2">
             {primaryItems.map((item) => {
               const content = (
                 <>
-                  <p className="text-sm leading-6 text-[var(--blue-quiet)]">{item.meta}</p>
-                  <h2 className="mt-3 text-[clamp(1.65rem,3vw,2.5rem)] font-black tracking-[-0.035em]">
+                  <p className="mb-7 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--dim)]">{item.meta}</p>
+                  <h2 className="text-3xl font-black tracking-[-0.04em]">
                     {item.title}
                   </h2>
-                  <p className="mt-3 max-w-2xl pretty text-base leading-7 text-[var(--muted)]">
+                  <p className="mt-4 pretty text-base leading-7 text-[var(--muted)]">
                     {item.description}
                   </p>
                 </>
               );
 
-              const className = "block border-b border-white/10 py-8 transition-colors md:py-10";
               return item.href ? (
-                <Link key={item.title} href={item.href} className={`${className} group hover:text-[var(--red)]`}>
+                <Link
+                  key={item.title}
+                  href={item.href}
+                  className="min-h-56 bg-[var(--panel-muted)] p-6 transition hover:bg-[var(--panel)] md:p-8"
+                >
                   {content}
-                  <span className="mt-5 inline-block text-sm font-semibold text-white group-hover:text-[var(--red)]">
-                    Read article →
-                  </span>
                 </Link>
               ) : (
-                <article key={item.title} className={className}>{content}</article>
+                <article key={item.title} className="min-h-56 bg-[var(--panel-muted)] p-6 md:p-8">
+                  {content}
+                </article>
               );
             })}
           </div>
 
-          <aside className="h-fit border-t border-[var(--red)] pt-5">
-            <h2 className="mb-6 text-lg font-bold tracking-[-0.02em]">{sideTitle ?? "Notes"}</h2>
+          <aside className="h-fit border-t border-[var(--border-strong)] pt-5">
+            <p className="mb-6 text-[10px] font-black uppercase tracking-[0.18em] text-[var(--red)]">
+              {sideTitle ?? "Operating Notes"}
+            </p>
             <div className="space-y-4">
               {sideItems.map((item) => (
-                <p key={item} className="border-b border-white/7 pb-4 text-sm leading-6 text-[var(--muted)] last:border-b-0">
+                <p
+                  key={item}
+                  className="border-b border-white/6 pb-4 text-sm leading-6 text-[var(--muted)] last:border-b-0 last:pb-0"
+                >
                   {item}
                 </p>
               ))}
             </div>
             {cta ? (
-              <Link href={cta.href} className="mt-7 inline-flex min-h-11 items-center border-b border-[var(--red)] text-sm font-semibold text-white transition hover:text-[var(--red)]">
-                {cta.label} <span className="ml-3" aria-hidden="true">→</span>
+              <Link
+                href={cta.href}
+                className="mt-8 inline-flex h-11 items-center bg-[var(--red)] px-6 text-[11px] font-black uppercase tracking-[0.18em] text-white transition hover:bg-[#9e1c1c]"
+              >
+                {cta.label}
               </Link>
             ) : null}
           </aside>
@@ -117,16 +137,43 @@ export function InnerPage(props: InnerPageProps) {
       {timeline.length > 0 ? (
         <section className="py-20 md:py-28">
           <div className="site-shell max-w-5xl">
-            <h2 className="mb-10 text-3xl font-black tracking-[-0.04em] md:text-4xl">Timeline</h2>
-            <div className="border-t border-white/10">
+            <div className="mb-12 flex items-center gap-5">
+              <span className="text-[11px] font-black uppercase tracking-[0.18em] text-[var(--blue-quiet)]">
+                Log
+              </span>
+              <h2 className="text-3xl font-black tracking-[-0.04em] md:text-4xl">
+                Operating Timeline
+              </h2>
+              <span className="h-px flex-1 bg-white/7" />
+            </div>
+
+            <div className="space-y-4">
               {timeline.map((item) => (
-                <article key={`${item.period}-${item.title}`} className="grid gap-5 border-b border-white/10 py-8 md:grid-cols-[160px_1fr]">
-                  <p className="text-sm font-semibold text-[var(--red)]">{item.period}</p>
+                <article
+                  key={`${item.period}-${item.title}`}
+                  className="grid gap-6 border border-white/7 bg-[#101010] p-6 md:grid-cols-[180px_1fr]"
+                >
+                  <p className="text-[11px] font-black uppercase tracking-[0.16em] text-[var(--red)]">
+                    {item.period}
+                  </p>
                   <div>
-                    <h3 className="text-2xl font-black tracking-[-0.035em]">{item.title}</h3>
-                    <p className="mt-3 pretty text-base leading-7 text-[var(--muted)]">{item.description}</p>
+                    <h3 className="text-2xl font-black tracking-[-0.035em]">
+                      {item.title}
+                    </h3>
+                    <p className="mt-3 pretty text-base leading-7 text-[var(--muted)]">
+                      {item.description}
+                    </p>
                     {item.tags ? (
-                      <p className="mt-5 text-sm leading-6 text-[var(--dim)]">{item.tags.join(" · ")}</p>
+                      <div className="mt-6 flex flex-wrap gap-2">
+                        {item.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="border border-white/8 px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] text-[var(--dim)]"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     ) : null}
                   </div>
                 </article>

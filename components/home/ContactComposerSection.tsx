@@ -52,15 +52,15 @@ export function ContactComposerSection() {
   return (
     <section className="py-16 md:py-24" id="contact">
       <div className="site-shell max-w-[1440px] text-center">
-        <p className="mb-4 text-sm font-semibold text-[var(--red)]">
-          Start a conversation
+        <p className="mb-4 text-[11px] font-black uppercase tracking-[0.2em] text-[var(--red)]">
+          New Commit Interface
         </p>
         <h2 className="balanced text-[clamp(2.15rem,6vw,4.25rem)] font-black tracking-[-0.035em]">
-          Tell me what you&apos;re working on.
+          Initialize Collaboration
         </h2>
         <p className="mx-auto mt-6 max-w-2xl pretty text-base leading-7 text-[var(--muted)]">
-          Share the idea, challenge, or project in front of you. I&apos;ll read it myself
-          and usually reply within 48 hours.
+          For AI workflows, media production, storytelling, web systems, and digital
+          operations. One reply, from me, within 48 hours.
         </p>
         <p className="mt-5 text-[clamp(0.95rem,2vw,1.15rem)] tracking-[-0.01em]">
           <a
@@ -76,8 +76,12 @@ export function ContactComposerSection() {
           onSubmit={handleSubmit}
           noValidate
         >
+          <div className="flex h-12 items-center justify-between border-b hairline px-5 text-[11px] uppercase tracking-[0.16em] text-[var(--dim)]">
+            <span>New message</span>
+            <span>Direct contact</span>
+          </div>
           <div className="space-y-5 p-4 sm:p-6 md:p-8">
-            <label className="grid gap-2.5 text-sm font-semibold text-[var(--muted)]">
+            <label className="grid gap-2.5 text-xs uppercase tracking-[0.14em] text-[var(--muted)]">
               <span>Name</span>
               <input
                 name="name"
@@ -91,7 +95,7 @@ export function ContactComposerSection() {
               />
               {errors.name ? <span id="name-error" className="normal-case tracking-normal text-red-400">{errors.name}</span> : null}
             </label>
-            <label className="grid gap-2.5 text-sm font-semibold text-[var(--muted)]">
+            <label className="grid gap-2.5 text-xs uppercase tracking-[0.14em] text-[var(--muted)]">
               <span>Email</span>
               <input
                 name="email"
@@ -105,7 +109,7 @@ export function ContactComposerSection() {
               />
               {errors.email ? <span id="email-error" className="normal-case tracking-normal text-red-400">{errors.email}</span> : null}
             </label>
-            <label className="grid gap-2.5 text-sm font-semibold text-[var(--muted)]">
+            <label className="grid gap-2.5 text-xs uppercase tracking-[0.14em] text-[var(--muted)]">
               <span>Subject</span>
               <input
                 name="subject"
@@ -114,11 +118,11 @@ export function ContactComposerSection() {
                 aria-describedby={errors.subject ? "subject-error" : undefined}
                 onChange={() => setErrors((current) => ({ ...current, subject: undefined }))}
                 className="motion-input h-12 border border-white/8 bg-[#121212] px-4 text-base text-[var(--text)] outline-none placeholder:text-[#7b8490] focus:border-[var(--blue-border)]"
-                placeholder="A short description of your project"
+                placeholder="Project scope or technical requirement"
               />
               {errors.subject ? <span id="subject-error" className="normal-case tracking-normal text-red-400">{errors.subject}</span> : null}
             </label>
-            <label className="grid gap-3 text-sm font-semibold text-[var(--muted)]">
+            <label className="grid gap-3 text-xs uppercase tracking-[0.14em] text-[var(--muted)]">
               <span>Message</span>
               <textarea
                 name="message"
@@ -127,7 +131,7 @@ export function ContactComposerSection() {
                 onChange={() => setErrors((current) => ({ ...current, message: undefined }))}
                 rows={5}
                 className="motion-input resize-y border border-white/8 bg-[#121212] p-4 text-base leading-7 text-[var(--text)] outline-none placeholder:text-[#7b8490] focus:border-[var(--blue-border)]"
-                placeholder="Share the context, what you need, and any timing that matters."
+                placeholder="Define project context, timeline, and operating requirements."
               />
               {errors.message ? <span id="message-error" className="normal-case tracking-normal text-red-400">{errors.message}</span> : null}
             </label>
@@ -138,26 +142,26 @@ export function ContactComposerSection() {
               role={status === "success" || status === "error" ? "status" : undefined}
               className={
                 status === "success"
-                  ? "feedback-enter text-sm text-[#6ed99a]"
+                  ? "feedback-enter text-[11px] uppercase tracking-[0.16em] text-[#20c56b]"
                   : status === "error"
-                    ? "feedback-enter text-sm text-red-400"
-                  : "feedback-enter text-sm text-[var(--dim)]"
+                    ? "feedback-enter text-[11px] uppercase tracking-[0.16em] text-red-400"
+                  : "feedback-enter text-[11px] uppercase tracking-[0.16em] text-[var(--dim)]"
               }
             >
               {status === "success"
-                ? "Thanks, your message is on its way."
+                ? "Message committed, response within 48h"
                 : status === "error"
-                  ? "I couldn't send that. Please email me directly."
+                  ? "Delivery unavailable, email directly"
                   : status === "submitting"
-                    ? "Sending your message…"
-                    : "I usually reply within 48 hours."}
+                    ? "Transmitting request"
+                    : "Direct contact"}
             </span>
             <button
               type="submit"
               disabled={status === "submitting"}
-              className="pressable min-h-12 bg-[var(--red)] px-7 text-sm font-semibold text-white hover:bg-[#9e1c1c] focus:outline-none focus:ring-2 focus:ring-[var(--blue-border)] focus:ring-offset-2 focus:ring-offset-[#060606] disabled:cursor-wait disabled:opacity-60"
+              className="pressable min-h-12 bg-[var(--red)] px-7 text-[11px] font-black uppercase tracking-[0.18em] text-white hover:bg-[#9e1c1c] focus:outline-none focus:ring-2 focus:ring-[var(--blue-border)] focus:ring-offset-2 focus:ring-offset-[#060606] disabled:cursor-wait disabled:opacity-60"
             >
-              {status === "submitting" ? "Sending…" : "Send message"}
+              {status === "submitting" ? "Sending" : "Send Request"}
             </button>
           </div>
         </form>

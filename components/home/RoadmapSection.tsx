@@ -29,7 +29,7 @@ export function RoadmapSection() {
     <section className="border-b hairline py-12 sm:py-14 md:py-20" id="roadmap">
       <div className="site-shell max-w-[1440px]">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4 sm:mb-10">
-        <SectionLabel label="What I am working on" tone="blue" />
+          <SectionLabel index="04 /" label="Active Roadmap" tone="blue" />
           <div className="hidden gap-5 text-[10px] uppercase tracking-[0.14em] text-[var(--dim)] sm:flex">
             <span className="before:mr-2 before:inline-block before:h-1.5 before:w-1.5 before:bg-[var(--red)]">Critical</span>
             <span className="before:mr-2 before:inline-block before:h-1.5 before:w-1.5 before:bg-[var(--blue)]">Systems</span>

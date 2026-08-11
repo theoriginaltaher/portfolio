@@ -17,12 +17,12 @@ export default async function BlogPage() {
     <PageFrame>
       <InnerPage
         eyebrow="05 / Blog"
-        title="Notes on making and building."
-        summary="Thoughts from the overlap of creative work, technology, media, and the practical lessons that come from bringing ideas to life."
+        title="Signals from the systems behind the work."
+        summary="A writing space for technical notes, workflow observations, and field reports from the overlap of AI, media, web architecture, and business operations."
         stats={[
-          { label: "What you will find", value: "Notes, essays, and project reflections" },
-          { label: "Subjects", value: "AI, creative systems, media, and leadership" },
-          { label: "Perspective", value: "Written from active practice" },
+          { label: "Format", value: "Notes / Essays / Case files" },
+          { label: "Focus", value: "AI, systems, media, operations" },
+          { label: "Status", value: "Editorial index in progress" },
         ]}
         primaryItems={posts.map((post) => ({
           title: post.title,
@@ -30,13 +30,13 @@ export default async function BlogPage() {
           meta: `${new Intl.DateTimeFormat("en", { dateStyle: "medium" }).format(new Date(post.publishedAt))} / ${post.readingTime} min read`,
           href: `/blog/${post.slug}`,
         }))}
-        sideTitle="About the writing"
+        sideTitle="Editorial System"
         sideItems={[
-          "These pieces begin with questions and observations from real work.",
-          "Some are short notes. Others grow into fuller reflections as a project develops.",
-          "The aim is to share what was learned clearly, without polishing away the useful details.",
+          "Writing is grouped by signal type rather than by publishing date alone.",
+          "Short notes can become case files when the underlying system matures.",
+          "Published notes are managed through the portfolio content system.",
         ]}
-        cta={{ label: "Start a conversation", href: "/contact" }}
+        cta={{ label: "Discuss Writing", href: "/contact" }}
       />
     </PageFrame>
   );
