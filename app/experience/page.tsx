@@ -232,7 +232,7 @@ export default function ExperiencePage() {
                   {professionalExperience.map((item) => (
                     <article
                       key={`${item.role}-${item.organization}`}
-                      className="group relative min-w-0 border border-[var(--border-strong)] bg-[var(--panel-muted)] p-6 transition-colors duration-300 hover:bg-[var(--panel)] sm:p-8 lg:grid lg:grid-cols-[minmax(240px,0.72fr)_minmax(0,1.45fr)] lg:gap-12"
+                      className="interactive-lift group relative min-w-0 border border-[var(--border-strong)] bg-[var(--panel-muted)] p-6 hover:bg-[var(--panel)] sm:p-8 lg:grid lg:grid-cols-[minmax(240px,0.72fr)_minmax(0,1.45fr)] lg:gap-12"
                     >
                       <span className="absolute -left-[47px] top-8 hidden size-3 border border-[var(--red)] bg-[var(--background)] lg:block" aria-hidden="true" />
                       <div>

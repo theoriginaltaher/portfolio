@@ -35,7 +35,7 @@ export function Navbar() {
                 <Link
                   href={item.href}
                   onClick={closeMenu}
-                  className="block px-3 py-2 transition hover:text-[var(--text)] data-[active=true]:text-[var(--text)]"
+                  className="relative block px-3 py-2 transition-colors duration-200 after:absolute after:bottom-0 after:left-3 after:right-3 after:h-px after:origin-left after:scale-x-0 after:bg-[var(--red)] after:transition-transform after:duration-300 after:ease-[var(--ease-out-quint)] hover:text-[var(--text)] hover:after:scale-x-100 data-[active=true]:text-[var(--text)] data-[active=true]:after:scale-x-100"
                   data-active={isActive}
                 >
                   <span className="text-[var(--dim)]">{item.index} / </span>
@@ -65,16 +65,16 @@ export function Navbar() {
           aria-expanded={menuOpen}
           aria-label="Toggle navigation menu"
           onClick={() => setMenuOpen((open) => !open)}
-          className="absolute right-0 top-1/2 flex h-12 w-12 -translate-y-1/2 flex-col justify-center gap-1.5 border border-[var(--border-strong)] px-3 transition hover:border-[var(--red)] md:hidden"
+          className="pressable absolute right-0 top-1/2 flex h-12 w-12 -translate-y-1/2 flex-col justify-center gap-1.5 border border-[var(--border-strong)] px-3 hover:border-[var(--red)] md:hidden"
         >
-          <span className="block h-px w-5 bg-[var(--text)]" />
-          <span className="block h-px w-5 bg-[var(--text)]" />
-          <span className="block h-px w-3 bg-[var(--red)]" />
+          <span className={`block h-px w-5 origin-center bg-[var(--text)] transition-transform duration-300 ease-[var(--ease-out-quint)] ${menuOpen ? "translate-y-[7px] rotate-45" : ""}`} />
+          <span className={`block h-px w-5 bg-[var(--text)] transition-opacity duration-200 ${menuOpen ? "opacity-0" : ""}`} />
+          <span className={`block h-px w-5 origin-center bg-[var(--red)] transition-transform duration-300 ease-[var(--ease-out-quint)] ${menuOpen ? "-translate-y-[7px] rotate-[-45deg] scale-x-100" : "scale-x-60"}`} />
         </button>
       </nav>
 
       {menuOpen ? (
-        <div className="fixed inset-x-0 bottom-0 top-14 z-40 overflow-y-auto bg-[#060606]/98 px-6 py-8 backdrop-blur-md md:hidden">
+        <div className="menu-enter absolute inset-x-0 top-full h-[calc(100dvh-3.5rem)] overflow-y-auto bg-[#060606]/98 px-6 py-8 backdrop-blur-md md:hidden">
           <div className="site-shell flex w-full flex-col gap-1">
             {navItems.map((item) => (
               <div key={item.href}>

@@ -58,7 +58,7 @@ export default async function ProjectsPage() {
             <Link
               key={path.href}
               href={path.href}
-              className={`group relative flex min-h-[430px] flex-col overflow-hidden p-5 transition duration-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-[var(--red)] md:p-8 ${index === 0 ? "lg:border-r lg:border-white/[0.07]" : ""}`}
+              className={`interactive-lift group relative flex min-h-[430px] flex-col overflow-hidden p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-[var(--red)] md:p-8 ${index === 0 ? "lg:border-r lg:border-white/[0.07]" : ""}`}
             >
               <div className="flex items-center justify-end text-sm text-white/45"><span>{path.meta}</span></div>
               <div className="relative my-7 min-h-[190px] flex-1 overflow-hidden bg-[#0c0c0c]">
@@ -76,7 +76,7 @@ export default async function ProjectsPage() {
                   <h2 className="text-[clamp(2rem,4vw,3.75rem)] font-black leading-none tracking-[-0.035em] text-white">{path.title}</h2>
                   <p className="mt-4 max-w-md pretty text-sm leading-6 text-[#aaa]">{path.description}</p>
                 </div>
-                <span className="grid h-11 w-11 shrink-0 place-items-center border border-white/16 text-xl text-white transition group-hover:border-[var(--red)] group-hover:text-[var(--red)]" aria-hidden="true">↗</span>
+                <span className="arrow-shift grid h-11 w-11 shrink-0 place-items-center border border-white/16 text-xl text-white transition-colors group-hover:border-[var(--red)] group-hover:text-[var(--red)]" aria-hidden="true">↗</span>
               </div>
             </Link>
           ))}

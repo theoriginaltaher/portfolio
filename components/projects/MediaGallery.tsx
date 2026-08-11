@@ -67,7 +67,7 @@ export function MediaGallery({ items }: { items: MediaItem[] }) {
 
       {activeItem ? (
         <div
-          className="fixed inset-0 z-[70] grid bg-black/96 px-4 py-4 md:px-8 md:py-6"
+          className="dialog-enter fixed inset-0 z-[70] grid bg-black/96 px-4 py-4 md:px-8 md:py-6"
           role="dialog"
           aria-modal="true"
           aria-label={`${activeItem.title} media viewer`}
@@ -75,12 +75,12 @@ export function MediaGallery({ items }: { items: MediaItem[] }) {
             if (event.currentTarget === event.target) close();
           }}
         >
-          <div className="mx-auto flex w-full max-w-[1440px] flex-col">
+          <div className="dialog-content-enter mx-auto flex w-full max-w-[1440px] flex-col">
             <div className="flex h-12 items-center justify-between border-b border-white/10 text-[10px] font-bold uppercase tracking-[0.14em] text-white/58">
               <span>Frame {String((activeIndex ?? 0) + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}</span>
-              <button type="button" onClick={close} className="px-3 py-2 text-white transition hover:text-[var(--red)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--red)]">Close viewer</button>
+              <button type="button" onClick={close} className="pressable px-3 py-2 text-white hover:text-[var(--red)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--red)]">Close viewer</button>
             </div>
-            <div className="relative min-h-0 flex-1">
+            <div key={activeItem.id} className="dialog-content-enter relative min-h-0 flex-1">
               <Image src={activeItem.src} alt={activeItem.alt} fill priority sizes="100vw" className="object-contain" />
             </div>
             <div className="flex items-end justify-between gap-4 border-t border-white/10 py-3">
@@ -89,8 +89,8 @@ export function MediaGallery({ items }: { items: MediaItem[] }) {
                 <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white/48">{activeItem.project} · {activeItem.year}</p>
               </div>
               <div className="flex gap-2">
-                <button type="button" onClick={() => move(-1)} className="h-10 border border-white/18 px-4 text-white transition hover:border-white/55 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--red)]" aria-label="Previous image">←</button>
-                <button type="button" onClick={() => move(1)} className="h-10 border border-white/18 px-4 text-white transition hover:border-white/55 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--red)]" aria-label="Next image">→</button>
+                <button type="button" onClick={() => move(-1)} className="pressable h-10 border border-white/18 px-4 text-white hover:border-white/55 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--red)]" aria-label="Previous image">←</button>
+                <button type="button" onClick={() => move(1)} className="pressable h-10 border border-white/18 px-4 text-white hover:border-white/55 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--red)]" aria-label="Next image">→</button>
               </div>
             </div>
           </div>

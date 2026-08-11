@@ -28,9 +28,9 @@ export function FeaturedSignalSection({ post }: { post?: BlogPost }) {
             </p>
             <Link
               href={`/blog/${post.slug}`}
-              className="mt-7 inline-flex min-h-11 items-center border-b border-[var(--red)] text-sm font-semibold text-white transition hover:text-[var(--red)]"
+              className="group mt-7 inline-flex min-h-11 items-center border-b border-[var(--red)] text-sm font-semibold text-white transition-colors hover:text-[var(--red)]"
             >
-              Read the article <span className="ml-3" aria-hidden="true">→</span>
+              Read the article <span className="arrow-shift ml-3" aria-hidden="true">→</span>
             </Link>
           </div>
         </article>

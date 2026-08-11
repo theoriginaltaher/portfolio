@@ -17,6 +17,9 @@
   --blue-quiet: #6f88a8;
   --blue-border: rgba(96, 128, 168, 0.5);
   --blue-soft: rgba(59, 88, 124, 0.12);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   /* Compatibility aliases for newer non-reference routes. */
   --accent: var(--red);
   --accent-strong: #9e1c1c;
@@ -104,6 +107,66 @@ textarea {
     text-wrap: pretty;
   }
 
+  .page-enter {
+    animation: pageEnter 480ms var(--ease-out-expo) both;
+  }
+
+  .hero-reveal {
+    animation: heroReveal 720ms var(--ease-out-expo) both;
+  }
+
+  .hero-reveal--2 { animation-delay: 90ms; }
+  .hero-reveal--3 { animation-delay: 170ms; }
+  .hero-reveal--4 { animation-delay: 240ms; }
+
+  .hero-image-reveal {
+    animation: heroImageReveal 900ms var(--ease-out-expo) 80ms both;
+  }
+
+  .menu-enter {
+    animation: menuEnter 260ms var(--ease-out-quint) both;
+  }
+
+  .dialog-enter {
+    animation: dialogEnter 220ms var(--ease-out-quart) both;
+  }
+
+  .dialog-content-enter {
+    animation: dialogContentEnter 320ms var(--ease-out-expo) both;
+  }
+
+  .feedback-enter {
+    animation: feedbackEnter 220ms var(--ease-out-quart) both;
+  }
+
+  .interactive-lift {
+    transition: transform 260ms var(--ease-out-quint), border-color 220ms var(--ease-out-quart), background-color 220ms var(--ease-out-quart);
+  }
+
+  .interactive-lift:hover { transform: translateY(-3px); }
+
+  .arrow-shift {
+    display: inline-block;
+    transition: transform 220ms var(--ease-out-quint);
+  }
+
+  .group:hover .arrow-shift { transform: translate(3px, -3px); }
+
+  .pressable {
+    transition: transform 140ms var(--ease-out-quart), color 200ms var(--ease-out-quart), background-color 200ms var(--ease-out-quart), border-color 200ms var(--ease-out-quart);
+  }
+
+  .pressable:active { transform: scale(0.975); }
+
+  .motion-input {
+    transition: border-color 220ms var(--ease-out-quart), background-color 220ms var(--ease-out-quart), box-shadow 220ms var(--ease-out-quart);
+  }
+
+  .motion-input:focus {
+    background-color: #141414;
+    box-shadow: 0 0 0 3px rgba(59, 88, 124, 0.12);
+  }
+
   .article-body {
     max-width: 72ch;
     padding-top: clamp(2.5rem, 6vw, 5rem);
@@ -135,6 +198,41 @@ textarea {
   .media-tile {
     min-height: 24rem;
   }
+}
+
+@keyframes pageEnter {
+  from { opacity: 0.82; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroReveal {
+  from { opacity: 0.35; transform: translateY(22px); filter: blur(5px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes heroImageReveal {
+  from { opacity: 0.35; transform: scale(1.035); filter: saturate(0.55) blur(4px); }
+  to { opacity: 1; transform: scale(1); filter: saturate(0.82) blur(0); }
+}
+
+@keyframes menuEnter {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes dialogEnter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes dialogContentEnter {
+  from { opacity: 0; transform: scale(0.985); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes feedbackEnter {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media (min-width: 768px) {
@@ -198,5 +296,24 @@ textarea {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.001ms !important;
+  }
+
+  .page-enter,
+  .hero-reveal,
+  .hero-image-reveal,
+  .menu-enter,
+  .dialog-enter,
+  .dialog-content-enter,
+  .feedback-enter {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .interactive-lift:hover,
+  .motion-lift:hover,
+  .pressable:active,
+  .group:hover .arrow-shift {
+    transform: none !important;
   }
 }

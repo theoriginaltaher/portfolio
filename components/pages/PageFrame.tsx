@@ -5,7 +5,7 @@ export function PageFrame({ children }: Readonly<{ children: React.ReactNode }>)
   return (
     <>
       <Navbar />
-      {children}
+      <div className="page-enter">{children}</div>
       <Footer />
     </>
   );

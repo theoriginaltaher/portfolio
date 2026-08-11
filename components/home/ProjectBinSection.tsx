@@ -69,7 +69,7 @@ export function ProjectBinSection({ projects }: { projects: Project[] }) {
               onFocus={() => setActiveIndex(index)}
               onBlur={() => setActiveIndex(null)}
               className={
-                `group panel relative flex min-h-[220px] flex-col overflow-hidden p-5 transition-[flex-grow,border-color,background-color] duration-500 ease-out sm:min-h-[235px] sm:p-6 xl:basis-0 ${activeIndex === null ? "xl:flex-1" : activeIndex === index ? "xl:flex-[1.65] xl:bg-[var(--panel-raised)] xl:border-[var(--border-strong)]" : "xl:flex-[.78]"}`
+                `motion-lift group panel relative flex min-h-[220px] flex-col overflow-hidden p-5 transition-[flex-grow,border-color,background-color,transform] duration-500 ease-[var(--ease-out-quint)] hover:-translate-y-1 sm:min-h-[235px] sm:p-6 xl:basis-0 ${activeIndex === null ? "xl:flex-1" : activeIndex === index ? "xl:flex-[1.65] xl:bg-[var(--panel-raised)] xl:border-[var(--border-strong)]" : "xl:flex-[.78]"}`
               }
             >
               <p className="mb-7 text-xs font-semibold text-[var(--blue-quiet)]">
