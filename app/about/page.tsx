@@ -219,7 +219,7 @@ export default async function AboutPage() {
           <div className="site-shell grid gap-10 lg:grid-cols-[1fr_0.48fr] lg:items-end lg:gap-20">
             <div>
               <p className="max-w-[19ch] text-[clamp(2.4rem,5.5vw,5.5rem)] font-black leading-[0.94] tracking-[-0.04em]">
-                The human part is part of the system.
+                Good work begins with people.
               </p>
             </div>
             <div className="border-t border-[var(--red)] pt-6">
@@ -247,7 +247,7 @@ export default async function AboutPage() {
                 Start a conversation
               </p>
               <h2 className="balanced mt-5 max-w-4xl text-[clamp(2.6rem,6vw,5.6rem)] font-black leading-[0.94] tracking-[-0.04em]">
-                Have a difficult system worth untangling?
+                Have a project worth talking through?
               </h2>
             </div>
             <Link

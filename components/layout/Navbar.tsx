@@ -104,9 +104,6 @@ export function Navbar() {
                 ) : null}
               </div>
             ))}
-            <p className="mx-2 mt-6 text-[9px] uppercase tracking-[0.14em] text-[var(--dim)]">
-              Sri Lanka / Working Globally / AI / Media / Web / Cloud
-            </p>
           </div>
         </div>
       ) : null}

@@ -10,30 +10,30 @@ const pathwayDefinitions = [
     code: "Systems",
     title: "Digital Systems",
     description:
-      "Architecture and development of high-density technical infrastructure for media-intensive operations.",
+      "Web platforms, practical tools, and digital workflows built for real teams and everyday use.",
     href: "/projects/systems",
-    meta: "Automation / Platforms / Workflows",
+    meta: "Web, automation, and workflow design",
   },
   {
     code: "Media",
     title: "Media Gallery",
-    description: "High-fidelity cinematic production and storytelling pipelines.",
+    description: "Photography, video, and event stories shaped into clear visual records.",
     href: "/projects/media",
-    meta: "Albums / Photography / Video",
+    meta: "Albums, photography, and video",
   },
   {
     code: "Experience",
     title: "Experience",
-    description: "Interfaces, service journeys, and usable systems shaped around people.",
+    description: "The roles, teams, and community work that shaped how I lead and collaborate.",
     href: "/experience",
-    meta: "UX / Interfaces / Service",
+    meta: "Leadership, community, and practice",
   },
   {
     code: "Writing",
     title: "Writing",
-    description: "Technical writing, operating notes, and decision records.",
+    description: "Notes on creative technology, media work, and lessons from building things.",
     href: "/blog",
-    meta: "Notes / Articles / Documentation",
+    meta: "Notes, essays, and observations",
   },
 ];
 
@@ -54,9 +54,9 @@ export function ProjectBinSection({ projects }: { projects: Project[] }) {
     <section className="border-b hairline bg-[#060606] py-12 sm:py-14 md:py-20" id="projects">
       <div className="site-shell max-w-[1440px]">
         <div className="mb-8 flex flex-col justify-between gap-3 sm:mb-10 md:flex-row md:items-end">
-          <SectionLabel index="03 /" label="Project_Bin.index" />
-          <p className="text-[11px] uppercase tracking-[0.16em] text-[var(--dim)]">
-            Systems / Media / Experience / Writing
+          <SectionLabel label="Selected work" />
+          <p className="max-w-md text-sm leading-6 text-[var(--muted)]">
+            A selection of technical, creative, and collaborative work.
           </p>
         </div>
 
@@ -72,7 +72,7 @@ export function ProjectBinSection({ projects }: { projects: Project[] }) {
                 `group panel relative flex min-h-[220px] flex-col overflow-hidden p-5 transition-[flex-grow,border-color,background-color] duration-500 ease-out sm:min-h-[235px] sm:p-6 xl:basis-0 ${activeIndex === null ? "xl:flex-1" : activeIndex === index ? "xl:flex-[1.65] xl:bg-[var(--panel-raised)] xl:border-[var(--border-strong)]" : "xl:flex-[.78]"}`
               }
             >
-              <p className="mb-7 text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--blue-quiet)]">
+              <p className="mb-7 text-xs font-semibold text-[var(--blue-quiet)]">
                 {item.code}
               </p>
               <h3 className="text-[clamp(1.35rem,2vw,1.65rem)] font-black tracking-[-0.04em]">
@@ -82,7 +82,7 @@ export function ProjectBinSection({ projects }: { projects: Project[] }) {
                 {item.description}
               </p>
 
-              <p className="mt-auto border-t border-white/8 pt-4 text-[10px] uppercase tracking-[0.13em] text-[var(--dim)]">{item.meta}</p>
+              <p className="mt-auto border-t border-white/8 pt-4 text-xs leading-5 text-[var(--dim)]">{item.meta}</p>
             </Link>
           ))}
         </div>
