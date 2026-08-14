@@ -5,17 +5,21 @@ import { notFound } from "next/navigation";
 import { PageFrame } from "@/components/pages/PageFrame";
 import { getMediaAlbum, mediaAlbums } from "@/src/data/media-albums";
 
+type MediaAlbumPageProps = { params: Promise<{ slug: string }> };
+
 export function generateStaticParams() {
   return mediaAlbums.map(({ slug }) => ({ slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const album = getMediaAlbum(params.slug);
+export async function generateMetadata({ params }: MediaAlbumPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const album = getMediaAlbum(slug);
   return { title: album ? `${album.title} | Media Gallery` : "Album not found" };
 }
 
-export default function MediaAlbumPage({ params }: { params: { slug: string } }) {
-  const album = getMediaAlbum(params.slug);
+export default async function MediaAlbumPage({ params }: MediaAlbumPageProps) {
+  const { slug } = await params;
+  const album = getMediaAlbum(slug);
   if (!album) notFound();
 
   const index = mediaAlbums.findIndex(({ slug }) => slug === album.slug);
