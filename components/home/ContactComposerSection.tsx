@@ -7,7 +7,7 @@ type Fields = "name" | "email" | "subject" | "message";
 type FieldErrors = Partial<Record<Fields, string>>;
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export function ContactComposerSection() {
+export function ContactComposerSection({ email }: { email: string }) {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errors, setErrors] = useState<FieldErrors>({});
 
@@ -64,10 +64,10 @@ export function ContactComposerSection() {
         </p>
         <p className="mt-5 text-[clamp(0.95rem,2vw,1.15rem)] tracking-[-0.01em]">
           <a
-            href="mailto:taher.hussain@outlook.com"
+            href={`mailto:${email}`}
             className="border-b border-[var(--red)] pb-1 text-[var(--text)] transition hover:text-[var(--red)]"
           >
-            taher.hussain@outlook.com
+            {email}
           </a>
         </p>
 

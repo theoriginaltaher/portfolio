@@ -2,6 +2,20 @@ import type { PortableTextBlock } from "@portabletext/types";
 
 export type ProjectCategory = "systems" | "media";
 
+export type SystemProject = {
+  slug: string;
+  title: string;
+  category: "systems";
+  description: string;
+  fullDescription: string;
+  tools: string[];
+  status: string;
+  year: string;
+  signal: string;
+  featured: boolean;
+  published: boolean;
+};
+
 export type SanityImage = {
   asset?: { _ref?: string; url?: string; metadata?: { dimensions?: { width: number; height: number } } };
   alt?: string;

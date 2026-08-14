@@ -1,7 +1,5 @@
 import { SectionLabel } from "./SectionLabel";
 
-const files = ["philosophy.md", "media_workflows", "systems_logic", "ai_process", "delivery_notes"];
-
 const principles = [
   {
     label: "01 / Story first",
@@ -27,25 +25,7 @@ export function ManifestoSection() {
       <div className="site-shell max-w-[1440px]">
         <SectionLabel index="02 /" label="PHILOSOPHY.MD" />
 
-        <div className="panel grid overflow-hidden md:grid-cols-[240px_1fr]">
-          <aside className="border-b hairline bg-[#0b0b0b] p-5 md:border-b-0 md:border-r">
-            <p className="mb-5 text-[10px] font-black uppercase tracking-[0.16em] text-[var(--blue-quiet)]">Working principles</p>
-            <div className="space-y-1">
-              {files.map((file) => (
-                <div
-                  key={file}
-                  className={
-                    file === "philosophy.md"
-                      ? "bg-[var(--red-soft)] px-3 py-2.5 text-sm text-[var(--red)]"
-                      : "px-3 py-2.5 text-sm text-[var(--muted)]"
-                  }
-                >
-                  {file}
-                </div>
-              ))}
-            </div>
-          </aside>
-
+        <div className="panel overflow-hidden">
           <article className="p-8 md:p-14">
             <p className="mb-8 text-[11px] font-black uppercase tracking-[0.18em] text-[var(--red)]">
               Document.001

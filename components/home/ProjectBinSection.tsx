@@ -37,16 +37,17 @@ const pathwayDefinitions = [
   },
 ];
 
-export function ProjectBinSection({ projects }: { projects: Project[] }) {
+export function ProjectBinSection({ projects, mediaCount }: { projects: Project[]; mediaCount: number }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const systems = projects.filter((project) => project.category === "systems");
-  const media = projects.filter((project) => project.category === "media");
   const pathways = pathwayDefinitions.map((pathway, index) => {
-    if (index === 0 && systems[0]) {
-      return { ...pathway, description: systems[0].shortDescription, meta: `${systems.length} published systems` };
+    if (index === 0) {
+      return systems[0]
+        ? { ...pathway, description: systems[0].shortDescription, meta: `${systems.length} published systems` }
+        : { ...pathway, meta: "Awaiting verified case studies" };
     }
-    if (index === 1 && media[0]) {
-      return { ...pathway, description: media[0].shortDescription, meta: `${media.length} published media projects` };
+    if (index === 1) {
+      return { ...pathway, meta: `${mediaCount} published collections` };
     }
     return pathway;
   });

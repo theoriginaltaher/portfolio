@@ -36,12 +36,11 @@ const result = await client.fetch(`{
 const allImages = result.projectImages.flatMap((project) => [project.featured, ...(project.gallery || [])].filter(Boolean));
 const undersized = allImages.filter((image) => image.width < 1200 || image.height < 800);
 const galleryAltFailures = result.missingGalleryAlt.filter((project) => project.missing?.length);
-const expected = { projects: 6, systems: 4, media: 2, experience: 5, skills: 9, posts: 2, settings: 1 };
-const countFailures = Object.entries(expected).filter(([key, value]) => result.counts[key] < value);
+const settingsFailure = result.counts.settings !== 1 || !result.siteSettings;
 
 console.log(JSON.stringify({ ...result.counts, projectImageCount: allImages.length, undersizedImageCount: undersized.length, missingFeaturedAltCount: result.missingProjectAlt.length, missingGalleryAltCount: galleryAltFailures.length }, null, 2));
 
-if (countFailures.length || undersized.length || result.missingProjectAlt.length || galleryAltFailures.length || !result.siteSettings) {
-  console.error(JSON.stringify({ countFailures, undersized, missingFeaturedAlt: result.missingProjectAlt, galleryAltFailures }, null, 2));
+if (settingsFailure || undersized.length || result.missingProjectAlt.length || galleryAltFailures.length) {
+  console.error(JSON.stringify({ settingsFailure, undersized, missingFeaturedAlt: result.missingProjectAlt, galleryAltFailures }, null, 2));
   process.exitCode = 1;
 }

@@ -10,7 +10,7 @@ copy .env.example .env.local
 npm run dev
 ```
 
-The application requires a configured Sanity project in every runtime. Development seed documents live in `src/data/seed/content.ts`, but they are only used by the explicit seeding command and are not imported into the website bundle.
+The application requires a configured Sanity project in every runtime. Portfolio content is authored directly in Sanity; the repository does not ship sample records or a production seeding command.
 
 ## Environment
 
@@ -19,7 +19,7 @@ The application requires a configured Sanity project in every runtime. Developme
 - `SANITY_API_TOKEN`: server-only read token when the dataset is private
 - `RESEND_API_KEY`: server-only Resend key
 - `CONTACT_EMAIL`: destination for form submissions
-- `CONTACT_FROM_EMAIL`: verified sender, or Resend's onboarding sender during testing
+- `CONTACT_FROM_EMAIL`: verified Resend sender used for portfolio enquiries
 - `NEXT_PUBLIC_SITE_URL`: canonical production URL used by metadata and the sitemap
 
 Never expose `SANITY_API_TOKEN` or `RESEND_API_KEY` with a `NEXT_PUBLIC_` prefix.
@@ -32,10 +32,9 @@ The five schemas are registered in `sanity.config.ts`: projects, experience, ski
 npm run studio
 ```
 
-The configured project can be reseeded and audited with:
+The configured project can be audited with:
 
 ```bash
-npm run sanity:seed
 npm run sanity:audit
 ```
 

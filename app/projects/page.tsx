@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PageFrame } from "@/components/pages/PageFrame";
+import { mediaAlbums } from "@/src/data/media-albums";
 import { getProjectsByCategory } from "@/src/lib/content";
 
 export const metadata: Metadata = {
@@ -29,13 +30,10 @@ const pathwayDefinitions = [
 export const revalidate = 60;
 
 export default async function ProjectsPage() {
-  const [systems, media] = await Promise.all([
-    getProjectsByCategory("systems"),
-    getProjectsByCategory("media"),
-  ]);
+  const systems = await getProjectsByCategory("systems");
   const pathways = pathwayDefinitions.map((path, index) => ({
     ...path,
-    meta: index === 0 ? `${systems.length} selected systems` : `${media.length} selected projects`,
+    meta: index === 0 ? `${systems.length} selected systems` : `${mediaAlbums.length} selected collections`,
   }));
   return (
     <PageFrame>
@@ -59,7 +57,7 @@ export default async function ProjectsPage() {
                     <div className="flex flex-col justify-between bg-[#0c0c0c] p-5"><span className="h-2 w-2 bg-[#20c56b]" /><div className="space-y-3"><span className="block h-2 w-4/5 bg-white/18" /><span className="block h-2 w-3/5 bg-[var(--red)]" /><span className="block h-2 w-2/5 bg-white/8" /></div></div>
                   </div>
                 ) : (
-                  <Image src="/assets/taher-portrait-hero-color.png" alt="Cinematic production still from the media archive" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover saturate-[0.72] transition duration-700 ease-out group-hover:scale-[1.018] group-hover:saturate-100" />
+                  <Image src={mediaAlbums[0].coverImage} alt={mediaAlbums[0].coverAlt} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover saturate-[0.72] transition duration-700 ease-out group-hover:scale-[1.018] group-hover:saturate-100" />
                 )}
               </div>
               <div className="flex items-end justify-between gap-6 border-t border-white/9 pt-6">

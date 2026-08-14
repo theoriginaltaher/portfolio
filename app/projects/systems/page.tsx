@@ -24,8 +24,8 @@ export default async function SystemsPage() {
             <h1 className="mt-7 balanced text-[clamp(3.6rem,9vw,6rem)] font-black leading-[0.86] tracking-[-0.038em] text-white">Digital<br />Systems</h1>
           </div>
           <div className="lg:border-l lg:border-white/9 lg:pl-9">
-            <p className="max-w-md pretty text-base leading-7 text-[#b2b2b2]">A working set of platforms, operational tools, and prototypes. Each project is presented as a system with inputs, decisions, and measurable output.</p>
-            <div className="mt-7 flex items-center justify-between border-t border-white/9 pt-4 text-[10px] font-bold uppercase tracking-[0.13em] text-white/38"><span>{systemProjects.length} selected works</span><span>2023–2026</span></div>
+            <p className="max-w-md pretty text-base leading-7 text-[#b2b2b2]">Published case studies document platforms, operational tools, and prototypes through their inputs, decisions, and outcomes.</p>
+            <div className="mt-7 flex items-center justify-between border-t border-white/9 pt-4 text-[10px] font-bold uppercase tracking-[0.13em] text-white/38"><span>{systemProjects.length} selected works</span><span>{systemProjects.length > 0 ? "Published archive" : "Case studies pending"}</span></div>
           </div>
         </header>
 

@@ -28,6 +28,7 @@ type InnerPageProps = {
   timeline?: TimelineItem[];
   sideTitle?: string;
   sideItems?: string[];
+  emptyMessage?: string;
   cta?: {
     label: string;
     href: string;
@@ -70,7 +71,7 @@ function PageHero({ eyebrow, title, summary, stats }: InnerPageProps) {
 }
 
 export function InnerPage(props: InnerPageProps) {
-  const { primaryItems = [], timeline = [], sideTitle, sideItems = [], cta } = props;
+  const { primaryItems = [], timeline = [], sideTitle, sideItems = [], cta, emptyMessage } = props;
 
   return (
     <main className="min-h-screen bg-[#060606]">
@@ -106,6 +107,7 @@ export function InnerPage(props: InnerPageProps) {
                 </article>
               );
             })}
+            {primaryItems.length === 0 && emptyMessage ? <p className="bg-[var(--panel-muted)] p-8 text-base leading-7 text-[var(--muted)] md:col-span-2">{emptyMessage}</p> : null}
           </div>
 
           <aside className="h-fit border-t border-[var(--border-strong)] pt-5">

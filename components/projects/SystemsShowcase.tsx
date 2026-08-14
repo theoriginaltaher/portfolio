@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { SystemProject } from "@/data/projects";
+import type { SystemProject } from "@/src/types";
 
 function SystemVisual({ index }: { index: number }) {
   const patterns = [
@@ -45,6 +45,16 @@ function SystemVisual({ index }: { index: number }) {
 }
 
 export function SystemsShowcase({ projects }: { projects: SystemProject[] }) {
+  if (projects.length === 0) {
+    return (
+      <div className="border-y border-white/[0.07] py-14 sm:py-20">
+        <p className="max-w-xl text-2xl font-black tracking-[-0.03em] text-white">No system case studies are published yet.</p>
+        <p className="mt-4 max-w-2xl text-sm leading-7 text-[#ababab]">This section is ready for verified project details, outcomes, tools, and supporting visuals.</p>
+        <Link href="/projects/media" className="mt-8 inline-flex min-h-11 items-center border border-white/12 px-5 text-xs font-bold text-white transition hover:border-[var(--blue-border)] hover:text-[var(--blue-quiet)]">Explore the media archive</Link>
+      </div>
+    );
+  }
+
   return (
     <div className="divide-y divide-white/[0.07] border-y border-white/[0.07]">
       {projects.map((project, index) => (

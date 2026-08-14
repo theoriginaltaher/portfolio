@@ -15,11 +15,12 @@ export async function POST(request: Request) {
   if (String(name).length > 120 || String(subject).length > 200 || String(message).length > 10000) return Response.json({ error: "One or more fields are too long." }, { status: 400 });
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_EMAIL;
-  if (!apiKey || !to) return Response.json({ error: "Email delivery is not configured." }, { status: 503 });
+  const from = process.env.CONTACT_FROM_EMAIL;
+  if (!apiKey || !to || !from) return Response.json({ error: "Email delivery is not configured." }, { status: 503 });
   try {
     const resend = new Resend(apiKey);
     const { error } = await resend.emails.send({
-      from: process.env.CONTACT_FROM_EMAIL || "Portfolio <onboarding@resend.dev>",
+      from,
       to,
       replyTo: String(email),
       subject: `Portfolio enquiry: ${String(subject)}`,

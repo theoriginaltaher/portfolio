@@ -50,7 +50,7 @@ export default async function AboutPage() {
   const [settings, skills] = await Promise.all([getSiteSettings(), getSkills()]);
   const bioText = portableTextToPlainText(settings.bio);
   const bioParagraphs = bioText.split(/\n{2,}/).filter(Boolean);
-  const portrait = settings.portrait?.asset?.url || "/assets/taher-portrait-hero-color.png";
+  const portrait = settings.portrait?.asset?.url;
   return (
     <PageFrame>
       <main className="min-h-screen overflow-hidden bg-[var(--background)] pt-14">
@@ -69,8 +69,7 @@ export default async function AboutPage() {
                   I build the systems behind ambitious work.
                 </h1>
                 <p className="mt-8 max-w-2xl pretty [overflow-wrap:anywhere] text-[clamp(1rem,1.5vw,1.2rem)] leading-8 text-[#b9bec6]">
-                  I&apos;m {settings.name}, a {settings.role.toLowerCase()}. {bioParagraphs[0] ||
-                    "My work sits where technical decisions, creative production, and day-to-day operations meet."}
+                  I&apos;m {settings.name}, a {settings.role.toLowerCase()}. {bioParagraphs[0]}
                 </p>
               </div>
 
@@ -92,14 +91,14 @@ export default async function AboutPage() {
             </div>
 
             <div className="relative min-h-[32rem] overflow-hidden lg:ml-[clamp(1.5rem,3vw,3.5rem)] lg:min-h-0">
-              <Image
+              {portrait ? <Image
                 src={portrait}
-                alt={settings.portrait?.alt || `${settings.name} in his workspace`}
+                alt={settings.portrait?.alt || settings.name}
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 46vw"
                 className="object-cover object-[66%_center] grayscale-[0.12]"
-              />
+              /> : <div className="grid h-full min-h-[32rem] place-items-center border border-[var(--border)] text-sm text-[var(--muted)]">No portrait is published.</div>}
               <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_58%,rgba(6,6,6,0.92)_100%)]" />
               <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 p-6 sm:p-8">
                 <p className="max-w-[25ch] text-xs font-semibold leading-5 text-[#d7d9dd]">

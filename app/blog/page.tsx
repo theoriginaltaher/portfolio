@@ -30,12 +30,9 @@ export default async function BlogPage() {
           meta: `${new Intl.DateTimeFormat("en", { dateStyle: "medium" }).format(new Date(post.publishedAt))} / ${post.readingTime} min read`,
           href: `/blog/${post.slug}`,
         }))}
+        emptyMessage="No verified articles are published yet. New writing will appear here after editorial review."
         sideTitle="Editorial System"
-        sideItems={[
-          "Writing is grouped by signal type rather than by publishing date alone.",
-          "Short notes can become case files when the underlying system matures.",
-          "Published notes are managed through the portfolio content system.",
-        ]}
+        sideItems={["Only reviewed articles published in the portfolio content system appear here."]}
         cta={{ label: "Discuss Writing", href: "/contact" }}
       />
     </PageFrame>
