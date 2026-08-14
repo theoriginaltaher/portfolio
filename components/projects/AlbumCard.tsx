@@ -8,7 +8,7 @@ export function AlbumCard({ album }: { album: MediaAlbum }) {
       <div className="relative aspect-[16/10] overflow-hidden bg-[#0b0b0b]">
         <Image src={album.coverImage} alt={album.coverAlt} fill sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw" className="object-cover saturate-[0.78] transition duration-500 group-hover:scale-[1.015] group-hover:saturate-100" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_45%,rgba(6,6,6,.72))]" />
-        <p className="absolute bottom-4 left-5 text-[10px] font-bold uppercase tracking-[0.14em] text-white/76">{album.mediaCount} selected frames</p>
+        <p className="absolute bottom-4 left-5 text-[10px] font-bold uppercase tracking-[0.14em] text-white/76">{album.mediaCount} selected {album.category === "Video" ? "films" : "frames"}</p>
       </div>
       <div className="p-5 sm:p-6">
         <div className="flex items-start justify-between gap-4"><p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--blue-quiet)]">{album.category}</p><span className="arrow-shift shrink-0 text-sm text-[var(--dim)]">↗</span></div>

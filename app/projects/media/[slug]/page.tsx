@@ -78,7 +78,7 @@ export default function MediaAlbumPage({ params }: { params: { slug: string } })
               ))}
             </div>
             <p className="text-[10px] font-bold uppercase tracking-[.14em] text-[var(--dim)]">
-              {album.mediaCount} photos / videos
+              {album.mediaCount} selected {album.category === "Video" ? "films" : "frames"}
             </p>
           </div>
 
@@ -88,23 +88,42 @@ export default function MediaAlbumPage({ params }: { params: { slug: string } })
                 key={`${item.src}-${itemIndex}`}
                 className={`relative overflow-hidden bg-[var(--panel)] ${item.featured ? "sm:col-span-2 xl:col-span-2" : ""}`}
               >
-                <div className={item.featured ? "aspect-[16/9]" : "aspect-[4/3]"}>
-                  <Image
-                    src={item.src}
-                    alt={item.alt}
-                    fill
-                    sizes="(min-width: 1280px) 45vw, (min-width:640px) 50vw, 100vw"
-                    className="object-cover"
-                  />
+                <div className={`relative ${item.featured ? "aspect-[16/9]" : "aspect-[4/3]"}`}>
+                  {item.type === "video" ? (
+                    <iframe
+                      src={item.src}
+                      title={item.alt}
+                      loading="lazy"
+                      allow="autoplay; encrypted-media; picture-in-picture"
+                      allowFullScreen
+                      className="absolute inset-0 h-full w-full border-0"
+                    />
+                  ) : (
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      fill
+                      sizes="(min-width: 1280px) 45vw, (min-width:640px) 50vw, 100vw"
+                      className="object-cover"
+                    />
+                  )}
                 </div>
                 {item.title ? (
-                  <figcaption className="border-t border-white/8 px-4 py-3 text-[10px] font-bold uppercase tracking-[.13em] text-[var(--muted)]">
-                    {item.title}
+                  <figcaption className="flex items-center justify-between gap-4 border-t border-white/8 px-4 py-3 text-[10px] font-bold uppercase tracking-[.13em] text-[var(--muted)]">
+                    <span>{item.title}</span>
+                    {item.sourceUrl ? <a href={item.sourceUrl} target="_blank" rel="noreferrer" className="shrink-0 text-[var(--blue-quiet)] transition hover:text-[var(--text)]">Open source ↗</a> : null}
                   </figcaption>
                 ) : null}
               </figure>
             ))}
           </div>
+        </section>
+
+        <section className="site-shell max-w-[1440px] pb-12 sm:pb-16 lg:pb-20">
+          <a href={album.sourceFolderUrl} target="_blank" rel="noreferrer" className="flex items-center justify-between border-y border-white/8 py-5 text-sm font-bold transition hover:border-[var(--border-strong)] hover:text-[var(--blue-quiet)]">
+            <span>View the full collection on Google Drive</span>
+            <span aria-hidden="true">↗</span>
+          </a>
         </section>
 
         <nav
