@@ -208,7 +208,7 @@ textarea {
   .project-bin-card {
     flex: 1 1 0;
     transition:
-      flex-grow 520ms var(--ease-out-quint),
+      flex-grow 380ms var(--ease-out-quint),
       border-color 260ms var(--ease-out-quart),
       background-color 260ms var(--ease-out-quart),
       transform 260ms var(--ease-out-quint);
@@ -320,13 +320,13 @@ textarea {
 @media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
   .project-bin-row:hover .project-bin-card,
   .project-bin-row:focus-within .project-bin-card {
-    flex-grow: 0.78;
+    flex-grow: 0.92;
   }
 
   .project-bin-row .project-bin-card:hover,
   .project-bin-row .project-bin-card:focus-visible {
-    flex-grow: 1.65;
-    transform: translateY(-4px);
+    flex-grow: 1.24;
+    transform: translateY(-3px);
   }
 }
 
