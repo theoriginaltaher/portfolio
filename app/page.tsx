@@ -16,13 +16,13 @@ export default async function Home() {
     getSiteSettings(),
   ]);
   return (
-    <PageFrame>
+    <PageFrame showFooterLinks>
       <main>
         <Hero settings={settings} />
         <ManifestoSection />
         <ProjectBinSection projects={projects} mediaCount={mediaAlbums.length} />
         <FeaturedSignalSection post={posts[0]} />
-        <ContactComposerSection email={settings.email} />
+        <ContactComposerSection email="taher.hussain@outlook.com" />
       </main>
     </PageFrame>
   );

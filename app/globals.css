@@ -198,6 +198,27 @@ textarea {
   .media-tile {
     min-height: 24rem;
   }
+
+  .project-bin-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .project-bin-card {
+    flex: 1 1 0;
+    transition:
+      flex-grow 520ms var(--ease-out-quint),
+      border-color 260ms var(--ease-out-quart),
+      background-color 260ms var(--ease-out-quart),
+      transform 260ms var(--ease-out-quint);
+  }
+
+  .project-bin-card:hover,
+  .project-bin-card:focus-visible {
+    border-color: var(--border-strong);
+    background: var(--panel-raised);
+  }
 }
 
 @keyframes pageEnter {
@@ -286,6 +307,27 @@ textarea {
     grid-column: span 4;
     grid-row: span 3;
   }
+
+  .project-bin-row {
+    flex-direction: row;
+  }
+
+  .project-bin-card {
+    min-width: 0;
+  }
+}
+
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+  .project-bin-row:hover .project-bin-card,
+  .project-bin-row:focus-within .project-bin-card {
+    flex-grow: 0.78;
+  }
+
+  .project-bin-row .project-bin-card:hover,
+  .project-bin-row .project-bin-card:focus-visible {
+    flex-grow: 1.65;
+    transform: translateY(-4px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -315,5 +357,13 @@ textarea {
   .pressable:active,
   .group:hover .arrow-shift {
     transform: none !important;
+  }
+
+  .project-bin-row:hover .project-bin-card,
+  .project-bin-row:focus-within .project-bin-card,
+  .project-bin-row .project-bin-card:hover,
+  .project-bin-row .project-bin-card:focus-visible {
+    flex-grow: 1;
+    transform: none;
   }
 }

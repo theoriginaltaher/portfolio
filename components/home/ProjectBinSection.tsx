@@ -1,7 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import { useState } from "react";
 import { SectionLabel } from "./SectionLabel";
 import type { Project } from "@/src/types";
 
@@ -38,7 +35,6 @@ const pathwayDefinitions = [
 ];
 
 export function ProjectBinSection({ projects, mediaCount }: { projects: Project[]; mediaCount: number }) {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const systems = projects.filter((project) => project.category === "systems");
   const pathways = pathwayDefinitions.map((pathway, index) => {
     if (index === 0) {
@@ -61,17 +57,12 @@ export function ProjectBinSection({ projects, mediaCount }: { projects: Project[
           </p>
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-2 xl:flex xl:gap-3" onMouseLeave={() => setActiveIndex(null)}>
-          {pathways.map((item, index) => (
+        <div className="project-bin-row">
+          {pathways.map((item) => (
             <Link
               key={item.title}
               href={item.href}
-              onMouseEnter={() => setActiveIndex(index)}
-              onFocus={() => setActiveIndex(index)}
-              onBlur={() => setActiveIndex(null)}
-              className={
-                `motion-lift group panel relative flex min-h-[220px] flex-col overflow-hidden p-5 transition-[flex-grow,border-color,background-color,transform] duration-500 ease-[var(--ease-out-quint)] hover:-translate-y-1 sm:min-h-[235px] sm:p-6 xl:basis-0 ${activeIndex === null ? "xl:flex-1" : activeIndex === index ? "xl:flex-[1.65] xl:bg-[var(--panel-raised)] xl:border-[var(--border-strong)]" : "xl:flex-[.78]"}`
-              }
+              className="project-bin-card group panel relative flex min-h-[220px] flex-col overflow-hidden p-5 sm:min-h-[235px] sm:p-6"
             >
               <p className="mb-7 text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--blue-quiet)]">
                 {item.code}

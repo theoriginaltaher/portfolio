@@ -65,7 +65,7 @@ export function ContactComposerSection({ email }: { email: string }) {
         <p className="mt-5 text-[clamp(0.95rem,2vw,1.15rem)] tracking-[-0.01em]">
           <a
             href={`mailto:${email}`}
-            className="border-b border-[var(--red)] pb-1 text-[var(--text)] transition hover:text-[var(--red)]"
+            className="border-b border-[var(--red)] pb-1 text-[var(--text)] transition-colors duration-200 hover:text-[var(--red)]"
           >
             {email}
           </a>
@@ -80,8 +80,8 @@ export function ContactComposerSection({ email }: { email: string }) {
             <span>New message</span>
             <span>Direct contact</span>
           </div>
-          <div className="space-y-5 p-4 sm:p-6 md:p-8">
-            <label className="grid gap-2.5 text-xs uppercase tracking-[0.14em] text-[var(--muted)]">
+          <div className="space-y-6 p-5 sm:p-7 md:p-9">
+            <label className="grid gap-2.5 text-sm font-semibold text-[#c2c6cc]">
               <span>Name</span>
               <input
                 name="name"
@@ -95,7 +95,7 @@ export function ContactComposerSection({ email }: { email: string }) {
               />
               {errors.name ? <span id="name-error" className="normal-case tracking-normal text-red-400">{errors.name}</span> : null}
             </label>
-            <label className="grid gap-2.5 text-xs uppercase tracking-[0.14em] text-[var(--muted)]">
+            <label className="grid gap-2.5 text-sm font-semibold text-[#c2c6cc]">
               <span>Email</span>
               <input
                 name="email"
@@ -109,7 +109,7 @@ export function ContactComposerSection({ email }: { email: string }) {
               />
               {errors.email ? <span id="email-error" className="normal-case tracking-normal text-red-400">{errors.email}</span> : null}
             </label>
-            <label className="grid gap-2.5 text-xs uppercase tracking-[0.14em] text-[var(--muted)]">
+            <label className="grid gap-2.5 text-sm font-semibold text-[#c2c6cc]">
               <span>Subject</span>
               <input
                 name="subject"
@@ -122,7 +122,7 @@ export function ContactComposerSection({ email }: { email: string }) {
               />
               {errors.subject ? <span id="subject-error" className="normal-case tracking-normal text-red-400">{errors.subject}</span> : null}
             </label>
-            <label className="grid gap-3 text-xs uppercase tracking-[0.14em] text-[var(--muted)]">
+            <label className="grid gap-3 text-sm font-semibold text-[#c2c6cc]">
               <span>Message</span>
               <textarea
                 name="message"
