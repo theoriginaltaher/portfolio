@@ -5,6 +5,8 @@ export const siteSettingsType = defineType({
   fields: [
     defineField({ name: "name", type: "string", validation: (rule) => rule.required() }),
     defineField({ name: "role", type: "string", validation: (rule) => rule.required() }),
+    defineField({ name: "headline", type: "string" }),
+    defineField({ name: "location", type: "string" }),
     defineField({ name: "bio", type: "array", of: [defineArrayMember({ type: "block" })], validation: (rule) => rule.required() }),
     defineField({ name: "portrait", type: "image", options: { hotspot: true }, fields: [defineField({ name: "alt", type: "string", validation: (rule) => rule.required() })] }),
     defineField({ name: "email", type: "string", validation: (rule) => rule.required().email() }),

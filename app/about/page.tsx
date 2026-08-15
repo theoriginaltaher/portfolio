@@ -61,7 +61,7 @@ export default async function AboutPage() {
             <div className="min-w-0 flex flex-col justify-between border-white/7 py-12 lg:border-r lg:py-16 lg:pr-[clamp(2rem,5vw,5rem)]">
               <div className="flex flex-col gap-2 text-[10px] font-bold uppercase tracking-[0.18em] sm:flex-row sm:items-center sm:justify-between sm:gap-6">
                 <p className="text-[var(--red)]">About Taher</p>
-                <p className="text-[var(--dim)] sm:text-right">Colombo, Sri Lanka / Working globally</p>
+                <p className="text-[var(--dim)] sm:text-right">{settings.location || "Sri Lanka"} / Working globally</p>
               </div>
 
               <div className="py-16 lg:py-20">

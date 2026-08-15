@@ -44,14 +44,62 @@ export type ExperienceEntry = {
   _id: string;
   role: string;
   organisation: string;
+  location?: string;
   dateRange: string;
-  description: string;
+  description?: string;
   category: "work" | "leadership";
   order: number;
   current: boolean;
 };
 
 export type Skill = { _id: string; label: string; order: number };
+
+export type EducationEntry = {
+  _id: string;
+  school: string;
+  qualification: string;
+  startDate?: string;
+  endDate?: string;
+  description?: string;
+  activities: string[];
+  order: number;
+};
+
+export type Certification = {
+  _id: string;
+  name: string;
+  issuer: string;
+  issuedOn?: string;
+  credentialId?: string;
+  credentialUrl?: string;
+  order: number;
+};
+
+export type Course = { _id: string; name: string; reference?: string; order: number };
+
+export type Language = { _id: string; name: string; proficiency: string; order: number };
+
+export type CareerProject = {
+  _id: string;
+  title: string;
+  description: string;
+  startDate?: string;
+  endDate?: string;
+  externalUrl?: string;
+  order: number;
+  published: boolean;
+};
+
+export type Recommendation = {
+  _id: string;
+  personName: string;
+  role?: string;
+  organisation?: string;
+  quote: string;
+  receivedAt?: string;
+  order: number;
+  published: boolean;
+};
 
 export type BlogPost = {
   _id: string;
@@ -69,6 +117,8 @@ export type BlogPostPreview = Omit<BlogPost, "body">;
 export type SiteSettings = {
   name: string;
   role: string;
+  headline?: string;
+  location?: string;
   bio: PortableTextBlock[];
   portrait?: SanityImage | null;
   email: string;

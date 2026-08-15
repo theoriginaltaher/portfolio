@@ -36,6 +36,7 @@ The configured project can be audited with:
 
 ```bash
 npm run sanity:audit
+npm run sanity:import-linkedin -- "C:\\path\\to\\extracted-linkedin-export"
 ```
 
 ## Verification

@@ -18,6 +18,12 @@ const result = await client.fetch(`{
     "systems": count(*[_type == "project" && published == true && category == "systems"]),
     "media": count(*[_type == "project" && published == true && category == "media"]),
     "experience": count(*[_type == "experience"]),
+    "education": count(*[_type == "education"]),
+    "certifications": count(*[_type == "certification"]),
+    "courses": count(*[_type == "course"]),
+    "languages": count(*[_type == "language"]),
+    "careerProjects": count(*[_type == "careerProject" && published == true]),
+    "recommendations": count(*[_type == "recommendation" && published == true]),
     "skills": count(*[_type == "skill"]),
     "posts": count(*[_type == "post" && defined(publishedAt)]),
     "settings": count(*[_type == "siteSettings"])

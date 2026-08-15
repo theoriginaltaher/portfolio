@@ -1,7 +1,7 @@
 import type { QueryParams } from "next-sanity";
 import { isSanityConfigured, sanityClient } from "@/src/lib/sanity/client";
 import * as queries from "@/src/lib/sanity/queries";
-import type { BlogPost, ExperienceEntry, Project, SiteSettings, Skill } from "@/src/types";
+import type { BlogPost, CareerProject, Certification, Course, EducationEntry, ExperienceEntry, Language, Project, Recommendation, SiteSettings, Skill } from "@/src/types";
 
 async function fetchContent<T>(query: string, params: QueryParams = {}): Promise<T> {
   if (!isSanityConfigured) {
@@ -22,6 +22,12 @@ export const getProject = (slug: string) => fetchContent<Project | null>(queries
 export const getProjectSlugs = () => fetchContent<{ slug: string }[]>(queries.ALL_PROJECT_SLUGS_QUERY);
 export const getExperience = (featured = false) => fetchContent<ExperienceEntry[]>(featured ? queries.FEATURED_EXPERIENCE_QUERY : queries.ALL_EXPERIENCE_QUERY);
 export const getSkills = () => fetchContent<Skill[]>(queries.ALL_SKILLS_QUERY);
+export const getEducation = () => fetchContent<EducationEntry[]>(queries.ALL_EDUCATION_QUERY);
+export const getCertifications = () => fetchContent<Certification[]>(queries.ALL_CERTIFICATIONS_QUERY);
+export const getCourses = () => fetchContent<Course[]>(queries.ALL_COURSES_QUERY);
+export const getLanguages = () => fetchContent<Language[]>(queries.ALL_LANGUAGES_QUERY);
+export const getCareerProjects = () => fetchContent<CareerProject[]>(queries.ALL_CAREER_PROJECTS_QUERY);
+export const getRecommendations = () => fetchContent<Recommendation[]>(queries.ALL_RECOMMENDATIONS_QUERY);
 export const getSiteSettings = () => fetchContent<SiteSettings>(queries.SITE_SETTINGS_QUERY);
 export const getPosts = (latest = false) => fetchContent<BlogPost[]>(latest ? queries.LATEST_POSTS_QUERY : queries.ALL_POSTS_QUERY);
 export const getPost = (slug: string) => fetchContent<BlogPost | null>(queries.POST_BY_SLUG_QUERY, { slug });

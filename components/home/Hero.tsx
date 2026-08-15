@@ -93,7 +93,7 @@ export function Hero({ settings }: { settings: SiteSettings }) {
             System Ready
           </span>
           <span className="hidden sm:inline">
-            Sri Lanka / Working Globally / AI / Media / Web / Cloud
+            {settings.location || "Sri Lanka"} / Working Globally / AI / Media / Web / Cloud
           </span>
         </div>
       </div>
