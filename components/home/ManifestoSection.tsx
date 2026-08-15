@@ -1,25 +1,31 @@
 import { SectionLabel } from "./SectionLabel";
 
+const flow = ["Story", "Media", "Interface", "Workflow", "System"];
+
 const principles = [
   {
     number: "01",
     label: "Story First",
     body: "Every project starts with the message. Whether it is a brand film, event album, website, or automation, the output must communicate clearly and feel intentional.",
+    tag: "Message / Intent / Direction",
   },
   {
     number: "02",
     label: "Systems Underneath",
     body: "Strong creative work needs structure behind it: organized files, repeatable workflows, clean interfaces, reliable platforms, and tools that make execution easier.",
+    tag: "Structure / Workflow / Delivery",
   },
   {
     number: "03",
     label: "AI With Taste",
     body: "AI is useful only when guided by judgment. The goal is not to generate more noise, but to improve speed, clarity, quality, and creative decision-making.",
+    tag: "Judgment / Speed / Quality",
   },
   {
     number: "04",
     label: "Built To Be Used",
     body: "Every solution should be practical. A website should be easy to navigate, an album should be easy to explore, a system should be easy to operate, and a workflow should save real time.",
+    tag: "Usability / Operation / Time Saved",
   },
 ];
 
@@ -30,30 +36,51 @@ export function ManifestoSection() {
         <SectionLabel index="02 /" label="PHILOSOPHY.MD" />
 
         <div className="panel overflow-hidden">
-          <article className="p-8 md:p-14">
-            <p className="mb-8 text-[11px] font-black uppercase tracking-[0.18em] text-[var(--red)]">
-              Document.001
-            </p>
-            <h3 className="balanced max-w-3xl text-3xl font-black leading-tight tracking-[-0.04em] md:text-5xl">
-              Creative systems, not isolated outputs.
-            </h3>
-            <p className="mt-6 max-w-3xl break-words pretty text-base leading-8 text-[#b7bbc2]">
-              Good digital work is not just a website, a video, a design, or an automation in isolation. It is the way all of those pieces connect: the story, the interface, the workflow, the media, and the system behind it.
-            </p>
+          <header className="flex min-h-12 flex-wrap items-center justify-between gap-3 border-b hairline bg-white/[0.015] px-5 py-3 text-[11px] font-black uppercase tracking-[0.13em] sm:px-7">
+            <p className="text-[var(--red)]">Document.001 / Philosophy.md</p>
+            <p className="text-[var(--blue-quiet)]">Working philosophy</p>
+          </header>
 
-            <div className="mt-11 grid gap-x-10 gap-y-7 md:grid-cols-2">
+          <article className="p-6 sm:p-8 md:p-12 lg:p-14">
+            <div className="grid gap-7 lg:grid-cols-[minmax(0,1.05fr)_minmax(340px,0.95fr)] lg:items-end lg:gap-16">
+              <h3 className="balanced text-[clamp(2.15rem,5vw,4.5rem)] font-black leading-[0.94] tracking-[-0.04em] lg:text-[clamp(3rem,4.3vw,4rem)] lg:whitespace-nowrap">
+                <span className="block">Creative systems.</span>
+                <span className="block text-[#d9dde3]">Not isolated outputs.</span>
+              </h3>
+              <p className="max-w-[64ch] break-words pretty text-base leading-8 text-[#c0c4cb]">
+                A website, video, album, design, or automation is only useful when it fits the larger system around it: the story, interface, workflow, media, and delivery process.
+              </p>
+            </div>
+
+            <ol aria-label="Connected creative system" className="mt-10 flex flex-col border-y border-white/10 py-2 sm:flex-row sm:items-center sm:py-0 md:mt-12">
+              {flow.map((step, index) => (
+                <li key={step} className="flex min-h-12 items-center gap-3 text-sm font-black text-[var(--text)] sm:min-h-16 sm:flex-1 sm:justify-between sm:gap-2">
+                  <span>{step}</span>
+                  {index < flow.length - 1 ? (
+                    <span aria-hidden="true" className="rotate-90 text-base font-normal text-[var(--red)] sm:rotate-0 sm:px-2">
+                      →
+                    </span>
+                  ) : null}
+                </li>
+              ))}
+            </ol>
+
+            <div className="mt-10 grid md:grid-cols-2 md:gap-x-10 lg:gap-x-14">
               {principles.map((principle) => (
-                <div key={principle.label} className="border-t border-white/10 pt-4">
-                  <h4 className="mb-3 flex items-baseline gap-3 text-sm font-black uppercase tracking-[0.1em]">
-                    <span className="text-[11px] text-[var(--blue-quiet)]">{principle.number}</span>
+                <section key={principle.label} className="flex flex-col border-t border-white/10 py-6 md:min-h-[250px] md:py-7">
+                  <h4 className="mb-4 flex items-baseline gap-3 text-sm font-black uppercase tracking-[0.08em]">
+                    <span className="text-[11px] tracking-[0.12em] text-[var(--blue-quiet)]">{principle.number} /</span>
                     <span>{principle.label}</span>
                   </h4>
-                  <p className="break-words pretty text-[15px] leading-7 text-[#b7bbc2]">{principle.body}</p>
-                </div>
+                  <p className="max-w-[62ch] break-words pretty text-[15px] leading-7 text-[#b9bec6]">{principle.body}</p>
+                  <p className="mt-6 border-t border-white/7 pt-3 text-[11px] font-bold uppercase tracking-[0.1em] text-[var(--blue-quiet)] md:mt-auto">
+                    {principle.tag}
+                  </p>
+                </section>
               ))}
             </div>
 
-            <blockquote className="mt-12 max-w-3xl break-words border-t border-[var(--red)] pt-6 text-lg italic leading-8 text-[#cbd0d7]">
+            <blockquote className="mt-5 max-w-4xl break-words border-t border-[var(--red)] pt-7 text-lg italic leading-8 text-[#cbd0d7] md:text-xl">
               The best work feels creative on the surface and structured underneath.
             </blockquote>
           </article>
