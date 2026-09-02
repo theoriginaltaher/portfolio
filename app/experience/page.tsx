@@ -21,12 +21,9 @@ export const revalidate = 60;
 
 function SectionHeading({ children, id, count }: Readonly<{ children: React.ReactNode; id: string; count?: number }>) {
   return (
-    <div className="mb-7 flex items-end justify-between gap-5 border-b border-[var(--border-strong)] pb-4 sm:mb-8">
-      <div className="flex items-end gap-5">
-        <h2 id={id} className="balanced text-2xl font-black tracking-[-0.035em] sm:text-3xl">{children}</h2>
-        <span className="mb-1.5 h-1.5 w-1.5 shrink-0 bg-[var(--red)]" aria-hidden="true" />
-      </div>
-      {typeof count === "number" ? <span className="text-xs font-bold tabular-nums text-[var(--dim)]">{count}</span> : null}
+    <div className="mb-2 flex items-end justify-between gap-5 border-b border-[var(--border-strong)] pb-5 sm:mb-3">
+      <h2 id={id} className="balanced text-2xl font-black tracking-[-0.035em] sm:text-3xl">{children}</h2>
+      {typeof count === "number" ? <span className="pb-1 text-xs tabular-nums text-[var(--dim)]">{count} {count === 1 ? "entry" : "entries"}</span> : null}
     </div>
   );
 }
@@ -39,28 +36,30 @@ function ExperienceList({ entries }: { entries: ExperienceEntry[] }) {
   if (entries.length === 0) return <EmptyState />;
 
   return (
-    <div className="relative lg:pl-14">
-      <span className="absolute bottom-6 left-[11px] top-6 hidden w-px bg-[var(--border-strong)] lg:block" aria-hidden="true" />
-      <div className="space-y-6">
-        {entries.map((entry) => (
-          <article key={entry._id} className="interactive-lift group relative min-w-0 border border-[var(--border-strong)] bg-[var(--panel-muted)] p-6 hover:bg-[var(--panel)] sm:p-8 lg:grid lg:grid-cols-[minmax(240px,0.72fr)_minmax(0,1.45fr)] lg:gap-12">
-            <span className="absolute -left-[47px] top-8 hidden size-3 border border-[var(--red)] bg-[var(--background)] lg:block" aria-hidden="true" />
-            <div>
-              <h3 className="balanced text-xl font-black leading-tight tracking-[-0.03em] sm:text-2xl">{entry.role}</h3>
-              <p className="mt-2 text-sm font-semibold text-[var(--blue-quiet)]">{entry.organisation}</p>
-              {entry.location ? <p className="mt-2 text-xs text-[var(--dim)]">{entry.location}</p> : null}
-            </div>
-            <div className="mt-6 border-t border-[var(--border)] pt-6 lg:mt-0 lg:border-t-0 lg:pt-0">
-              <div className="flex flex-wrap items-center gap-3 text-sm">
-                <p className="font-bold text-[#d5d7da]">{entry.dateRange}</p>
-                {entry.current ? <span className="flex items-center gap-2 text-xs font-bold text-[#6fd69b]"><span className="size-1.5 bg-[#20c56b]" aria-hidden="true" />Current</span> : null}
-              </div>
-              {entry.description ? <p className="pretty mt-5 max-w-[68ch] whitespace-pre-line text-sm leading-7 text-[#aeb3ba] sm:text-[15px]">{entry.description}</p> : null}
-            </div>
+    <ol>
+      {entries.map((entry, index) => (
+        <li key={entry._id} className="group relative grid min-w-0 grid-cols-[1.25rem_minmax(0,1fr)] gap-x-4 border-b border-[var(--border)] py-8 first:pt-7 sm:grid-cols-[1.5rem_minmax(0,1fr)] sm:gap-x-6 sm:py-10 lg:grid-cols-[minmax(150px,.42fr)_2rem_minmax(0,1.55fr)] lg:gap-x-8 lg:py-12">
+          <div className="col-start-2 flex flex-wrap items-center gap-x-4 gap-y-2 lg:col-start-1 lg:row-start-1 lg:block">
+            <p className="text-sm font-semibold leading-6 tabular-nums text-[#d5d7da] lg:max-w-[15ch]">{entry.dateRange}</p>
+            {entry.current ? <span className="inline-flex items-center gap-2 text-xs font-semibold text-[#74d59d] lg:mt-3"><span className="size-1.5 rounded-full bg-[#20c56b]" aria-hidden="true" />Current</span> : null}
+          </div>
+
+          <div className="absolute bottom-0 left-[0.34rem] top-0 w-px bg-[var(--border-strong)] sm:left-[0.47rem] lg:relative lg:bottom-auto lg:left-auto lg:top-auto lg:col-start-2 lg:row-start-1 lg:h-full lg:w-full lg:bg-transparent" aria-hidden="true">
+            <span className={`absolute left-0 top-[0.42rem] size-3 -translate-x-[calc(50%-0.5px)] rounded-full border ${entry.current ? "border-[var(--red)] bg-[var(--red)]" : "border-[#667080] bg-[var(--background)]"} transition-colors duration-300 group-hover:border-[var(--red)] lg:left-1/2`} />
+            {index < entries.length - 1 ? <span className="absolute bottom-[-3rem] left-1/2 top-[1.35rem] hidden w-px -translate-x-1/2 bg-[var(--border-strong)] lg:block" /> : null}
+          </div>
+
+          <article className="col-start-2 mt-5 min-w-0 lg:col-start-3 lg:row-start-1 lg:mt-0">
+            <h3 className="balanced text-[clamp(1.45rem,2.6vw,2.25rem)] font-black leading-[1.06] tracking-[-0.035em] transition-colors duration-300 group-hover:text-white">{entry.role}</h3>
+            <p className="mt-3 text-sm font-semibold leading-6 text-[var(--blue-quiet)]">
+              {entry.organisation}
+              {entry.location ? <span className="font-normal text-[var(--dim)]"> · {entry.location}</span> : null}
+            </p>
+            {entry.description ? <p className="pretty mt-5 max-w-[68ch] whitespace-pre-line text-[15px] leading-7 text-[#aeb3ba] sm:text-base sm:leading-8">{entry.description}</p> : null}
           </article>
-        ))}
-      </div>
-    </div>
+        </li>
+      ))}
+    </ol>
   );
 }
 
@@ -104,11 +103,9 @@ export default async function ExperiencePage() {
         <header className="border-b border-[var(--border)]">
           <div className="site-shell py-12 sm:py-16 lg:py-20">
             <div className="mx-auto max-w-[1320px]">
-              <h1 className="balanced max-w-5xl text-[clamp(2.8rem,7vw,5.75rem)] font-black leading-[0.94] tracking-[-0.04em]">
-                Journey <span className="font-light text-[var(--blue-quiet)]">&amp;</span> <span className="block sm:inline">Expertise</span>
-              </h1>
+              <h1 className="balanced max-w-5xl text-[clamp(2.8rem,7vw,5.75rem)] font-black leading-[0.94] tracking-[-0.04em]">Experience</h1>
               <p className="pretty mt-7 max-w-[72ch] text-base leading-7 text-[#bec2c8] sm:text-lg sm:leading-8">
-                A working record of roles, projects, education, and practical capabilities. Every entry is managed through the portfolio content system.
+                The teams I’ve helped, the systems I’ve built, and the communities I’ve contributed to, alongside the learning that shaped the work.
               </p>
             </div>
           </div>

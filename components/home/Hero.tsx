@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { HOME_HERO_PORTRAIT } from "@/src/config/brand";
 import { portableTextToPlainText } from "@/src/lib/adapters";
 import type { SiteSettings } from "@/src/types";
 
@@ -9,18 +10,23 @@ export function Hero({ settings }: { settings: SiteSettings }) {
   const [firstName, ...lastNameParts] = settings.name.split(" ");
   const lastName = lastNameParts.join(" ");
   const summary = portableTextToPlainText(settings.bio).split(/\n{2,}/)[0];
-  const portrait = settings.portrait?.asset?.url;
   return (
     <section className="relative overflow-hidden border-b hairline bg-[#060606] px-0 pb-4 pt-[72px] md:pb-7 md:pt-[84px]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_40%,rgba(59,88,124,0.16),transparent_30rem),radial-gradient(circle_at_8%_90%,rgba(176,32,32,0.08),transparent_24rem)]" />
 
       <div className="site-shell relative max-w-[1440px]">
         <div className="relative flex min-h-[auto] flex-col justify-between overflow-hidden border border-[var(--border-strong)] bg-[#0a0b0c] p-5 md:min-h-[min(740px,calc(100svh-118px))] md:p-9">
-          {portrait ? <div className="hero-image-reveal absolute bottom-0 right-0 top-0 hidden w-[46%] overflow-hidden bg-[#101215] lg:block">
-            <Image src={portrait} alt={settings.portrait?.alt || settings.name} fill priority sizes="46vw" className="object-cover object-[56%_34%] saturate-[0.82] contrast-[1.04]" />
+          <div className="hero-image-reveal absolute bottom-0 right-0 top-0 hidden w-[46%] overflow-hidden bg-[#101215] lg:block">
+            <Image src={HOME_HERO_PORTRAIT} alt="Taher Hussain holding a camera in his creative workspace" fill priority sizes="46vw" className="object-cover object-[56%_34%] saturate-[0.82] contrast-[1.04]" />
             <div className="absolute inset-0 bg-[linear-gradient(90deg,#0a0b0c_0%,rgba(10,11,12,0.42)_25%,rgba(10,11,12,0.02)_66%,rgba(10,11,12,0.2)_100%)]" />
             <div className="absolute inset-x-0 bottom-0 h-[46%] bg-gradient-to-t from-[#0a0b0c] to-transparent" />
-          </div> : null}
+            <div aria-hidden="true" className="pointer-events-none absolute inset-5 border border-white/[0.07]">
+              <span className="absolute -left-px -top-px h-4 w-px bg-[var(--red)]" />
+              <span className="absolute -left-px -top-px h-px w-4 bg-[var(--red)]" />
+              <span className="absolute -bottom-px -right-px h-4 w-px bg-[var(--blue-border)]" />
+              <span className="absolute -bottom-px -right-px h-px w-4 bg-[var(--blue-border)]" />
+            </div>
+          </div>
 
           <div className="hero-reveal relative z-10 flex flex-wrap items-start justify-between gap-x-5 gap-y-3 text-[9px] font-black uppercase leading-5 tracking-[0.2em] md:text-[11px]">
             <p className="m-0 max-w-[26ch] text-[var(--red)]">
@@ -68,7 +74,7 @@ export function Hero({ settings }: { settings: SiteSettings }) {
               </div>
             </div>
 
-            <aside className="min-w-[min(100%,232px)] rounded-2xl border border-white/10 bg-[#090a0b]/75 p-4 text-[13px] text-[#a8adb5] backdrop-blur-md">
+            <aside className="min-w-[min(100%,248px)] border-y border-white/10 bg-[#090a0b]/60 px-4 py-3.5 text-[13px] text-[#aeb3bb] backdrop-blur-sm lg:mr-2">
               <div className="flex items-center justify-between gap-4 border-b border-white/7 pb-2.5">
                 <span className="text-[9px] font-black uppercase tracking-[0.18em] text-[var(--text)]">
                   Workspace Focus

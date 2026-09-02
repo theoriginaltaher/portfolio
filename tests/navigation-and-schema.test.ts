@@ -1,8 +1,13 @@
 import fc from "fast-check";
 import { navItems } from "@/components/layout/nav-data";
 import { schemaTypes } from "@/sanity/schemas";
+import { HOME_HERO_PORTRAIT } from "@/src/config/brand";
 
 describe("navigation and schema properties", () => {
+  it("keeps the approved camera portrait on the homepage", () => {
+    expect(HOME_HERO_PORTRAIT).toBe("/assets/taher-hero-camera.png");
+  });
+
   // Property 2: Every navigation label maps to its required href.
   it("keeps the navigation mapping stable", () => { const expected = [["Home", "/"], ["Experience", "/experience"], ["Projects", "/projects"], ["About", "/about"], ["Blog", "/blog"], ["Contact", "/contact"]]; fc.assert(fc.property(fc.integer({ min: 0, max: expected.length - 1 }), (index) => { expect([navItems[index].label, navItems[index].href]).toEqual(expected[index]); })); });
 
