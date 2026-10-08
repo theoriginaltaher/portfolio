@@ -27,5 +27,6 @@ export function toSystemProject(project: Project, index: number): SystemProject 
     signal: `SYS / ${String(index + 1).padStart(2, "0")}`,
     featured: project.featured,
     published: project.published,
+    media: project.media,
   };
 }

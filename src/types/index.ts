@@ -1,4 +1,5 @@
 import type { PortableTextBlock } from "@portabletext/types";
+import type { MediaAsset } from "./media";
 
 export type ProjectCategory = "systems" | "media";
 
@@ -14,6 +15,7 @@ export type SystemProject = {
   signal: string;
   featured: boolean;
   published: boolean;
+  media?: MediaAsset[];
 };
 
 export type SanityImage = {
@@ -32,6 +34,8 @@ export type Project = {
   fullDescription?: PortableTextBlock[];
   featuredImage?: SanityImage | null;
   gallery?: SanityImage[];
+  media?: MediaAsset[];
+  externalUrl?: string;
   year: string;
   role: string;
   tools: string[];

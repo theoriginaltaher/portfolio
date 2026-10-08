@@ -4,16 +4,16 @@ import { Hero } from "@/components/home/Hero";
 import { ManifestoSection } from "@/components/home/ManifestoSection";
 import { ProjectBinSection } from "@/components/home/ProjectBinSection";
 import { PageFrame } from "@/components/pages/PageFrame";
-import { mediaAlbums } from "@/src/data/media-albums";
-import { getFeaturedProjects, getPosts, getSiteSettings } from "@/src/lib/content";
+import { getProjectsByCategory, getMediaAlbums, getPosts, getSiteSettings } from "@/src/lib/content";
 
 export const revalidate = 60;
 
 export default async function Home() {
-  const [projects, posts, settings] = await Promise.all([
-    getFeaturedProjects(),
+  const [projects, posts, settings, mediaAlbums] = await Promise.all([
+    getProjectsByCategory("systems"),
     getPosts(true),
     getSiteSettings(),
+    getMediaAlbums(),
   ]);
   return (
     <PageFrame showFooterLinks>

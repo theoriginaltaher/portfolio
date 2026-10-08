@@ -1,13 +1,17 @@
 import { defineQuery } from "next-sanity";
 
-const projectFields = `{_id,title,"slug":slug.current,category,shortDescription,fullDescription,featuredImage{...,asset->{url,metadata{dimensions}}},gallery[]{...,asset->{url,metadata{dimensions}}},year,role,tools,order,featured,published}`;
+export const mediaItemFields = `{"id":_key,type,title,alt,caption,"src":select(type == "video" => video.asset->url, image.asset->url),"poster":poster.asset->url,"captionsUrl":captions.asset->url,"width":image.asset->metadata.dimensions.width,"height":image.asset->metadata.dimensions.height}`;
+const visibleMedia = `items[hidden != true && ((type == "image" && defined(image.asset)) || (type == "video" && defined(video.asset)))]`;
+const albumFields = `{title,"slug":slug.current,date,category,description,"tags":coalesce(tags,[]),"items":${visibleMedia}${mediaItemFields}}`;
+export const MEDIA_ALBUMS_QUERY = defineQuery(`*[_type == "mediaAlbum" && published == true && !(_id in path("drafts.**"))] | order(order asc, title asc) ${albumFields}`);
+const projectFields = `{_id,title,"slug":slug.current,category,shortDescription,fullDescription,featuredImage{...,asset->{url,metadata{dimensions}}},gallery[hidden != true]{...,asset->{url,metadata{dimensions}}},"media":media[hidden != true]${mediaItemFields},externalUrl,year,role,"tools":coalesce(tools,[]),order,featured,published}`;
 const postFields = `{_id,title,"slug":slug.current,excerpt,publishedAt,readingTime,body,coverImage{...,asset->{url,metadata{dimensions}}}}`;
 
 export const ALL_PUBLISHED_PROJECTS_QUERY = defineQuery(`*[_type == "project" && published == true] | order(order asc) ${projectFields}`);
 export const SYSTEMS_PROJECTS_QUERY = defineQuery(`*[_type == "project" && published == true && category == "systems"] | order(order asc) ${projectFields}`);
 export const MEDIA_PROJECTS_QUERY = defineQuery(`*[_type == "project" && published == true && category == "media"] | order(order asc) ${projectFields}`);
-export const PROJECT_BY_SLUG_QUERY = defineQuery(`*[_type == "project" && slug.current == $slug][0] ${projectFields}`);
-export const ALL_PROJECT_SLUGS_QUERY = defineQuery(`*[_type == "project" && published == true]{"slug":slug.current}`);
+export const PROJECT_BY_SLUG_QUERY = defineQuery(`*[_type == "project" && published == true && category == "systems" && slug.current == $slug][0] ${projectFields}`);
+export const ALL_PROJECT_SLUGS_QUERY = defineQuery(`*[_type == "project" && published == true && category == "systems"]{"slug":slug.current}`);
 export const FEATURED_PROJECTS_QUERY = defineQuery(`*[_type == "project" && published == true && featured == true] | order(order asc)[0...6] ${projectFields}`);
 export const ALL_EXPERIENCE_QUERY = defineQuery(`*[_type == "experience"] | order(order asc){_id,role,organisation,location,dateRange,description,category,order,current}`);
 export const FEATURED_EXPERIENCE_QUERY = defineQuery(`*[_type == "experience"] | order(order asc)[0...5]{_id,role,organisation,location,dateRange,description,category,order,current}`);

@@ -2,70 +2,29 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageFrame } from "@/components/pages/PageFrame";
-import { toSystemProject } from "@/src/lib/adapters";
-import { getProject, getProjectSlugs } from "@/src/lib/content";
+import { ArticleBody } from "@/components/blog/ArticleBody";
+import { MediaGallery } from "@/components/projects/MediaGallery";
+import { getProject, getProjectSlugs, getProjectsByCategory } from "@/src/lib/content";
+import type { MediaAsset } from "@/src/types/media";
 
-type ProjectPageProps = { params: Promise<{ slug: string }> };
-
+type Props = { params: Promise<{ slug: string }> };
 export const revalidate = 60;
-
-export async function generateStaticParams() {
-  return getProjectSlugs();
+export async function generateStaticParams() { return getProjectSlugs(); }
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const project = await getProject((await params).slug);
+  return project ? { title: `${project.title} | Taher Hussain`, description: project.shortDescription, openGraph: { images: project.media?.[0]?.src ? [project.media[0].src] : [] } } : { title: "Project not found", robots: { index: false } };
 }
-
-export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const project = await getProject(slug);
-  return project
-    ? { title: `${project.title} | Taher Hussain`, description: project.shortDescription }
-    : { title: "Project not found | Taher Hussain" };
-}
-
-export default async function ProjectDetailPage({ params }: ProjectPageProps) {
-  const { slug } = await params;
-  const sanityProject = await getProject(slug);
-  if (!sanityProject?.published || sanityProject.category !== "systems") notFound();
-  const project = toSystemProject(sanityProject, sanityProject.order - 1);
-
-  return (
-    <PageFrame>
-      <main className="min-h-screen bg-[#060606] pt-14">
-        <header className="site-shell relative min-h-[72svh] overflow-hidden border-x border-white/[0.055] px-5 pb-12 pt-20 md:px-10 md:pb-16 md:pt-28">
-          <div className="absolute inset-0 grid-field opacity-30" />
-          <div className="absolute -right-24 top-10 h-[34rem] w-[34rem] rounded-full border border-white/[0.055]" />
-          <div className="absolute right-8 top-40 h-[22rem] w-[22rem] rounded-full border border-white/[0.075]" />
-          <div className="relative flex h-full min-h-[54svh] flex-col justify-between">
-            <div className="flex items-center justify-between gap-4 text-[10px] font-bold uppercase tracking-[0.14em] text-white/42">
-              <Link href="/projects/systems" className="transition hover:text-white">← Digital Systems</Link>
-              <span>{project.signal}</span>
-            </div>
-            <div className="mt-24">
-              <div className="mb-6 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.14em] text-white/42"><span className="h-1.5 w-1.5 bg-[#20c56b]" />{project.status}</div>
-              <h1 className="max-w-5xl balanced text-[clamp(3.2rem,9vw,6rem)] font-black leading-[0.88] tracking-[-0.038em] text-white">{project.title}</h1>
-            </div>
-          </div>
-        </header>
-
-        <section className="site-shell grid border-x border-t border-white/[0.055] lg:grid-cols-[0.72fr_1.28fr]">
-          <aside className="border-b border-white/[0.07] p-5 md:p-10 lg:border-b-0 lg:border-r">
-            <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/36">System record</p>
-            <dl className="mt-8 divide-y divide-white/[0.07] border-y border-white/[0.07] text-sm">
-              <div className="flex justify-between gap-5 py-4"><dt className="text-white/42">Period</dt><dd className="font-semibold text-white">{project.year}</dd></div>
-              <div className="flex justify-between gap-5 py-4"><dt className="text-white/42">Category</dt><dd className="font-semibold text-white">Digital system</dd></div>
-              <div className="flex justify-between gap-5 py-4"><dt className="text-white/42">State</dt><dd className="font-semibold text-white">{project.status}</dd></div>
-            </dl>
-          </aside>
-          <article className="px-5 py-14 md:px-10 md:py-20">
-            <p className="max-w-3xl balanced text-2xl font-bold leading-[1.35] tracking-[-0.02em] text-white md:text-4xl">{project.fullDescription}</p>
-            <p className="mt-10 max-w-2xl pretty text-base leading-8 text-[#aaa]">{project.description}</p>
-            <div className="mt-14 border-t border-white/[0.08] pt-7">
-              <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/36">Built with</p>
-              <div className="mt-5 flex flex-wrap gap-2">{project.tools.map((tool) => <span key={tool} className="border border-white/10 px-3 py-2 text-xs font-semibold text-white/72">{tool}</span>)}</div>
-            </div>
-            <Link href="/projects/systems" className="mt-16 inline-flex border-b border-[var(--red)] pb-2 text-sm font-bold text-white transition hover:text-[var(--red)]">Explore all systems →</Link>
-          </article>
-        </section>
-      </main>
-    </PageFrame>
-  );
+export default async function ProjectDetailPage({ params }: Props) {
+  const project = await getProject((await params).slug);
+  if (!project?.published || project.category !== "systems") notFound();
+  const projects = await getProjectsByCategory("systems");
+  const next = projects[(projects.findIndex(item => item.slug === project.slug) + 1) % projects.length];
+  const legacy: MediaAsset[] = [project.featuredImage, ...(project.gallery || [])].flatMap((image, i) => image?.asset?.url ? [{ id: `legacy-${i}`, type: "image" as const, src: image.asset.url, alt: image.alt || project.title, title: image.alt || `${project.title} screen ${i + 1}` }] : []);
+  const media = project.media !== undefined && project.media !== null ? project.media.filter(item => item.src) : legacy;
+  return <PageFrame><main className="portfolio-page">
+    <header className="site-shell album-header"><Link href="/projects/systems" className="archive-back">← Digital Systems</Link><div className="album-heading"><div><p className="album-kicker">Digital project</p><h1>{project.title}</h1></div><div><p className="archive-intro">{project.shortDescription}</p>{project.externalUrl?.startsWith("https://") && <a className="archive-crosslink" href={project.externalUrl} target="_blank" rel="noopener noreferrer">Visit website ↗</a>}</div></div><div className="album-info"><div className="album-tags">{project.tools.map(tool => <span key={tool}>{tool}</span>)}</div><span>{media.length} screens · Select to explore</span></div></header>
+    <section className="site-shell album-content" aria-label={`${project.title} screens`}><MediaGallery items={media} title={project.title} contained /></section>
+    {project.fullDescription?.length ? <section className="site-shell project-overview"><h2>About the project</h2><div><ArticleBody value={project.fullDescription} /><dl className="project-facts"><div><dt>Role</dt><dd>{project.role}</dd></div><div><dt>Period</dt><dd>{project.year}</dd></div></dl></div></section> : null}
+    <nav className="site-shell album-navigation" aria-label="Project navigation"><Link href="/projects/systems"><span>← Digital Systems</span><strong>Explore all projects</strong></Link>{next && next.slug !== project.slug && <Link href={`/projects/${next.slug}`}><span>Next project →</span><strong>{next.title}</strong></Link>}</nav>
+  </main></PageFrame>;
 }

@@ -20,6 +20,7 @@ reports/lighthouse/**/server.pid
 reports/lighthouse/**/*.json
 reports/isr-state.json
 .sanity/
+reports/media/
 
 .vercel
 .env*

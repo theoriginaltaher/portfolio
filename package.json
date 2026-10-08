@@ -43,8 +43,10 @@
     "eslint": "latest",
     "eslint-config-next": "latest",
     "fast-check": "^4.9.0",
+    "groq-js": "^2.0.0",
     "jsdom": "^30.0.1",
     "lighthouse": "^12.8.2",
+    "playwright": "^1.60.0",
     "typescript": "latest",
     "vitest": "^4.1.10"
   }

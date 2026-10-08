@@ -14,6 +14,8 @@ describe("navigation and schema properties", () => {
   // Property 14: Every Sanity schema contains its required fields.
   it("contains every required Sanity field", () => {
     const requirements: Record<string, string[]> = {
+      mediaAlbum: ["title", "slug", "published", "category", "date", "description", "tags", "order", "items"],
+      mediaItem: ["title", "type", "hidden", "image", "video", "poster", "alt", "caption", "captions"],
       project: ["title", "slug", "category", "shortDescription", "fullDescription", "featuredImage", "gallery", "year", "role", "tools", "order", "featured", "published"],
       careerProject: ["title", "description", "startDate", "endDate", "externalUrl", "order", "published"],
       experience: ["role", "organisation", "location", "dateRange", "description", "category", "order", "current"],

@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { MediaImage } from "@/components/projects/MediaImage";
 import Link from "next/link";
 import { PageFrame } from "@/components/pages/PageFrame";
-import { mediaAlbums } from "@/src/data/media-albums";
-import { getProjectsByCategory } from "@/src/lib/content";
+import { getMediaAlbums, getProjectsByCategory } from "@/src/lib/content";
 
 export const metadata: Metadata = {
   title: "Projects | Taher Hussain",
@@ -15,7 +14,7 @@ const pathwayDefinitions = [
     index: "A",
     title: "Digital Systems",
     href: "/projects/systems",
-    description: "AI workflows, web platforms, cloud tools, and technical prototypes built to work beyond the demo.",
+    description: "Digital products, websites, and mobile interfaces, explored through their screens and flows.",
     accent: "red",
   },
   {
@@ -30,7 +29,7 @@ const pathwayDefinitions = [
 export const revalidate = 60;
 
 export default async function ProjectsPage() {
-  const systems = await getProjectsByCategory("systems");
+  const [systems, mediaAlbums] = await Promise.all([getProjectsByCategory("systems"), getMediaAlbums()]);
   const pathways = pathwayDefinitions.map((path, index) => ({
     ...path,
     meta: index === 0 ? `${systems.length} selected systems` : `${mediaAlbums.length} selected collections`,
@@ -52,12 +51,9 @@ export default async function ProjectsPage() {
               <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.14em] text-white/38"><span>Path {path.index}</span><span>{path.meta}</span></div>
               <div className="relative my-7 min-h-[190px] flex-1 overflow-hidden bg-[#0c0c0c]">
                 {path.accent === "red" ? (
-                  <div className="absolute inset-0 grid grid-cols-[0.65fr_1.35fr] gap-px bg-white/5 p-px">
-                    <div className="grid-field relative bg-[#0c0c0c]"><span className="absolute left-1/2 top-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10" /><span className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--red)]" /></div>
-                    <div className="flex flex-col justify-between bg-[#0c0c0c] p-5"><span className="h-2 w-2 bg-[#20c56b]" /><div className="space-y-3"><span className="block h-2 w-4/5 bg-white/18" /><span className="block h-2 w-3/5 bg-[var(--red)]" /><span className="block h-2 w-2/5 bg-white/8" /></div></div>
-                  </div>
+                  <MediaImage src={systems[0]?.media?.[0]?.src} alt={systems[0]?.media?.[0]?.alt || "Digital Systems"} sizes="(min-width: 1024px) 50vw, 100vw" className="object-contain p-4" />
                 ) : (
-                  <Image src={mediaAlbums[0].coverImage} alt={mediaAlbums[0].coverAlt} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover saturate-[0.72] transition duration-700 ease-out group-hover:scale-[1.018] group-hover:saturate-100" />
+                  <MediaImage src={mediaAlbums[0]?.coverImage} alt={mediaAlbums[0]?.coverAlt || "Media Gallery"} sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
                 )}
               </div>
               <div className="flex items-end justify-between gap-6 border-t border-white/9 pt-6">

@@ -1,4 +1,6 @@
 import type { QueryParams } from "next-sanity";
+import { cache } from "react";
+import type { MediaAlbum } from "@/src/types/media";
 import { isSanityConfigured, sanityClient } from "@/src/lib/sanity/client";
 import * as queries from "@/src/lib/sanity/queries";
 import type { BlogPost, CareerProject, Certification, Course, EducationEntry, ExperienceEntry, Language, Project, Recommendation, SiteSettings, Skill } from "@/src/types";
@@ -9,9 +11,6 @@ async function fetchContent<T>(query: string, params: QueryParams = {}): Promise
   }
 
   const result = await sanityClient.fetch<T>(query, params, { next: { revalidate: 60 } });
-  if (result === null || result === undefined) {
-    throw new Error("Live Sanity returned no content for a required query.");
-  }
   return result;
 }
 
@@ -20,6 +19,15 @@ export const getFeaturedProjects = () => fetchContent<Project[]>(queries.FEATURE
 export const getProjectsByCategory = (category: Project["category"]) => fetchContent<Project[]>(category === "systems" ? queries.SYSTEMS_PROJECTS_QUERY : queries.MEDIA_PROJECTS_QUERY);
 export const getProject = (slug: string) => fetchContent<Project | null>(queries.PROJECT_BY_SLUG_QUERY, { slug });
 export const getProjectSlugs = () => fetchContent<{ slug: string }[]>(queries.ALL_PROJECT_SLUGS_QUERY);
+export const getMediaAlbums = cache(async (): Promise<MediaAlbum[]> => {
+  const albums = await fetchContent<MediaAlbum[]>(queries.MEDIA_ALBUMS_QUERY);
+  return albums.map(album => {
+    const items = (album.items || []).filter(item => Boolean(item.src));
+    const cover = items[0];
+    return { ...album, tags: album.tags || [], items, coverImage: cover?.type === "video" ? cover.poster : cover?.src, coverAlt: cover?.alt || album.title };
+  }).filter(album => album.items.length > 0);
+});
+export const getMediaAlbum = async (slug: string) => (await getMediaAlbums()).find(album => album.slug === slug);
 export const getExperience = (featured = false) => fetchContent<ExperienceEntry[]>(featured ? queries.FEATURED_EXPERIENCE_QUERY : queries.ALL_EXPERIENCE_QUERY);
 export const getSkills = () => fetchContent<Skill[]>(queries.ALL_SKILLS_QUERY);
 export const getEducation = () => fetchContent<EducationEntry[]>(queries.ALL_EDUCATION_QUERY);
